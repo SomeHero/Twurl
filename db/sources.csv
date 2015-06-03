@@ -1,0 +1,317 @@
+User,Handle,Category,Channel
+BuzzFeed,@BuzzFeed,News,Viral
+ViralVideosNews,@ViralVideosNews,News,Viral
+hypervocal,@hypervocal,News,Viral
+ninemsn Pickle,@ninemsnpickle,News,Viral
+Mashable Video,@mashablevideo,News,Viral
+TMZ ,@TmzViralPosts,News,Viral
+Huffington Post ,@HuffingtonPost,News,Viral
+DRUDGE REPORT ,@DRUDGE_REPORT,News,Viral
+TheBlaze ,@theblaze,News,Viral
+IJReview ,@ijreview,News,Viral
+CNN Breaking News,@cnnbrk,News,U.S.
+U.S. News,@usnews,News,U.S.
+The New York Times,@nytimes,News,U.S.
+Washington Post,@washingtonpost,News,U.S.
+CNN ,@CNN,News,U.S.
+Wall Street Journal ,@WSJ,News,U.S.
+Reuters U.S. News ,@ReutersUS,News,U.S.
+Fox News,@FoxNews,News,U.S.
+msnbc ,@msnbc,News,U.S.
+Yahoo News ,@YahooNews,News,U.S.
+BBC News  World  ,@BBCWorld,News,World
+Reuters Top News,@Reuters,News,World
+The Economist,@TheEconomist,News,World
+BBC Breaking News,@BBCBreaking,News,World
+The Associated Press,@AP,News,World
+Telegraph World News,@TelegraphWorld,News,World
+TIME.com ,@TIME,News,World
+ABC Foreign Desk,@WorldNews,News,World
+Breaking News,@BreakingNews,News,World
+New York Times World,@nytimesworld,News,World
+WSJ World News,@WSJworld,News,World
+Post World,@PostWorldNews,News,World
+Al Jazeera English,@AJEnglish,News,World
+Barack Obama,@BarackObama,Politics,People
+Rachel Maddow MSNBC ,@maddow,Politics,People
+Bill Maher ,@billmaher,Politics,People
+Rick Santorum ,@RickSantorum,Politics,People
+Hillary Clinton ,@HillaryClinton,Politics,People
+Ted Cruz,@tedcruz,Politics,People
+Dr. Rand Paul,@RandPaul,Politics,People
+Dr. Ben Carson,@RealBenCarson,Politics,People
+Gov. Mike Huckabee,@GovMikeHuckabee,Politics,People
+Bernie Sanders,@SenSanders,Politics,People
+Martin O'Malley ,@GovernorOMalley,Politics,People
+Jeb Bush,@JebBush,Politics,People
+Marco Rubio ,@marcorubio,Politics,People
+Chris Christie,@ChrisChristie,Politics,People
+Rick Perry,@GovernorPerry,Politics,People
+Philip Klein,@philipaklein,Politics,People
+Byron York ,@ByronYork,Politics,People
+Timothy P Carney,@TPCarney,Politics,People
+Rush Limbaugh,@rushlimbaugh,Politics,People
+Morning Joe,@Morning_Joe,Politics,People
+Lawrence O'Donnell,@Lawrence,Politics,People
+Brit Hume,@brithume,Politics,People
+Megyn Kelly,@megynkelly,Politics,People
+Donna Brazile,@donnabrazile,Politics,People
+Chuck Todd,@chucktodd,Politics,People
+Nick Gillespie,@nickgillespie,Politics,People
+Bret Baier,@BretBaier,Politics,People
+Ezra Klein,@ezraklein,Politics,People
+Melissa Harris-Perry ,@MHarrisPerry,Politics,People
+morningmika,@morningmika,Politics,People
+rolandsmartin,@rolandsmartin,Politics,People
+David Corn,@DavidCornDC,Politics,People
+Anderson Cooper,@andersoncooper,Politics,People
+Matt Mackowiak,@MattMackowiak,Politics,People
+Michelle Malkin,@michellemalkin,Politics,People
+Dylan Byers,@DylanByers,Politics,People
+Burgess Everett ,@burgessev,Politics,People
+daveweigel,@daveweigel,Politics,People
+Matt Lewis,‏@mattklewis,Politics,People
+Tony Romm ,@TonyRomm,Politics,People
+The Hill ,@thehill,Politics,Outlets
+HuffPost Politics ,@HuffPostPol,Politics,Outlets
+CNN Politics ,@CNNPolitics,Politics,Outlets
+Fox News Politics,@foxnewspolitics,Politics,Outlets
+NBC Politics,@NBCPolitics,Politics,Outlets
+NPR Politics,@nprpolitics,Politics,Outlets
+Post Politics,@postpolitics,Politics,Outlets
+POLITICO,@politico,Politics,Outlets
+Breaking Politics ,@breakingpol,Politics,Outlets
+BI Politics ,@bi_politics,Politics,Outlets
+NYT Politics ,@nytpolitics,Politics,Outlets
+ABC News Politics ,@ABCPolitics,Politics,Outlets
+Roll Call Politics,@rollcallpols,Politics,Outlets
+Slate,@Slate,Politics,Outlets
+RedState,@RedState,Politics,Outlets
+The Weekly Standard ,@weeklystandard,Politics,Outlets
+Breitbart News ,@BreitbartNews,Politics,Outlets
+IJ Politics ,@IJ_Politics,Politics,Outlets
+Daily Kos,@dailykos,Politics,Outlets
+Mother Jones,@MotherJones,Politics,Outlets
+ThinkProgress ,@thinkprogress,Politics,Outlets
+Adam Schefter ,@AdamSchefter,Sports,People
+Adrian Wojnarowski ,@WojYahooNBA,Sports,People
+Ryan Kennedy ,@THNRyanKennedy,Sports,People
+Buster Olney ,@Buster_ESPN,Sports,People
+Iain Macintosh ,@iainmacintosh,Sports,People
+Doug Ferguson ,@dougferguson405,Sports,People
+Michael Katz  ,@KatzM,Sports,People
+Darren Rovell ,@darrenrovell,Sports,People
+Bill Simmons ,@BillSimmons,Sports,People
+Bill Barnwell  ,@billbarnwell,Sports,People
+Serena Williams  ,@serenawilliams,Sports,People
+Robin Lopez ,@rolopez42,Sports,People
+Jason Dufner,@JasonDufner,Sports,People
+Kevin Durant,@kdtrey5,Sports,People
+Alex Morgan,@alexmorgan13,Sports,People
+J.A. Adande,@jadande,Sports,People
+Jose Canseco,@JoseCanseco,Sports,People
+Cristiano Ronaldo,@Cristiano,Sports,People
+LeBron James,@KingJames,Sports,People
+ESPN ,@espn,Sports,Outlets
+SportsCenter ,@SportsCenter,Sports,Outlets
+Deadspin ,@Deadspin,Sports,Outlets
+NFL,@nfl,Sports,Outlets
+Sports Illustrated ,@SInow,Sports,Outlets
+FOX SPORTS News ,@FOXSportsNews,Sports,Outlets
+NBA,@NBA,Sports,Outlets
+MLB ,@MLB,Sports,Outlets
+USA TODAY Sports ,@USATODAYsports,Sports,Outlets
+WSJ Sports,@WSJSports,Sports,Outlets
+Sky Sports News HQ ,@SkySportsNewsHQ,Sports,Outlets
+Sporting News ,@sportingnews,Sports,Outlets
+Sport24News ,@Sport24news,Sports,Outlets
+Taylor Swift ,@taylorswift13,Entertainment,People
+Lady Gaga,@ladygaga,Entertainment,People
+Justin Timberlake,@jtimberlake,Entertainment,People
+Ellen DeGeneres,@TheEllenShow,Entertainment,People
+Kim Kardashian West,@KimKardashian,Entertainment,People
+Oprah Winfrey,@Oprah,Entertainment,People
+jimmy fallon,@jimmyfallon,Entertainment,People
+daniel tosh,@danieltosh,Entertainment,People
+ashton kutcher,@aplusk,Entertainment,People
+Conan O'Brien,@ConanOBrien,Entertainment,People
+Neil Patrick Harris,@ActuallyNPH,Entertainment,People
+Kourtney Kardashian,@kourtneykardash,Entertainment,People
+Beyoncé Knowles,@Beyonce,Entertainment,People
+Ryan Seacrest,@RyanSeacrest,Entertainment,People
+KANYE WEST,@kanyewest,Entertainment,People
+Snoop Dogg,@SnoopDogg,Entertainment,People
+Simon Cowell,@SimonCowell,Entertainment,People
+Charlie Sheen,@charliesheen,Entertainment,People
+E! Online ,@eonline,Entertainment,Outlets
+TMZ ,@TMZ,Entertainment,Outlets
+Entertainment Weekly,@EW,Entertainment,Outlets
+Hollywood Reporter,@THR,Entertainment,Outlets
+Variety,@Variety,Entertainment,Outlets
+VANITY FAIR,@VanityFair,Entertainment,Outlets
+People magazine,@people,Entertainment,Outlets
+BuzzFeedEntmnt ,@BuzzFeedEnt,Entertainment,Outlets
+E! News,@ENews,Entertainment,Outlets
+BBC Ents News Team,@BBCNewsEnts,Entertainment,Outlets
+BI Entertainment,@BI_Entertain,Entertainment,Outlets
+Rolling Stone,@RollingStone,Entertainment,Outlets
+Daily Mail Celebrity,@DailyMailCeleb,Entertainment,Outlets
+CNN Entertainment,@CNNent,Entertainment,Outlets
+Us Weekly,@usweekly,Entertainment,Outlets
+MTV,@MTV,Entertainment,Outlets
+Jeff Rose ,@jjeffrose,Money,People
+Farnoosh Torabi,@FARNOOSH,Money,People
+Carl Richards ,@behaviorgap,Money,People
+Dave Ramsey ,@DaveRamsey,Money,People
+Suze Orman ,@SuzeOrmanShow,Money,People
+Heidi Moore ,@moorehn,Money,People
+Kimberly Palmer ,@alphaconsumer,Money,People
+Mandi Woodruff ,@mandiwoodruff,Money,People
+Catey Hill ,@CateyHill,Money,People
+Liz Pulliam Weston ,@Lizweston,Money,People
+Danielle Douglas ,@DaniDougPost,Money,People
+Cameron Huddleston ,@CHLebedinsky,Money,People
+Jonnelle Marte ,@Jonnelle,Money,People
+Rob Carrick,@rcarrick,Money,People
+Tim Maurer,@TimMaurer,Money,People
+Donna Freedman,@DLFreedman,Money,People
+Shannon Ryan,@TheHeavyPurse,Money,People
+J. Money,@BudgetsAreSexy,Money,People
+Joe Saul-Sehy,@AverageJoeMoney,Money,People
+LaTisha,@YoungFinances,Money,People
+Deacon Hayes ,@DeaconHayes,Money,People
+Shannon McLay ,@blonde_finance,Money,People
+Dave Grant,@davegrant82,Money,People
+Mary Beth Storjohann ,@marybstorj,Money,People
+Sophia Bera,@sophiabera,Money,People
+Kali Hawlk,@KaliHawlk,Money,People
+Stefanie O’Connell,@brokeandbeau,Money,People
+CNNMoney ,@CNNMoney,Money,Outlets
+U.S. News Money ,@USNewsMoney,Money,Outlets
+HuffPost Money,@huffpostmoney,Money,Outlets
+Bloomberg Business ,@business,Money,Outlets
+Breaking News Money,@breakingmoney,Money,Outlets
+USA TODAY Money ,@USATODAYmoney,Money,Outlets
+Forbes ,@Forbes,Money,Outlets
+WSJ Business News ,@WSJbusiness,Money,Outlets
+NBC News Business ,@NBCNewsBusiness,Money,Outlets
+AP Business News ,@APBusiness,Money,Outlets
+Reuters Business,@ReutersBiz,Money,Outlets
+Forbes SportsMoney,@SportsMoneyBlog,Money,Outlets
+The College Investor ,@CollegeInvestin,Money,Outlets
+Money Crashers,@MoneyCrashers,Money,Outlets
+Listen Money Matters,@MoneyMattersMan,Money,Outlets
+The Billfold,@TheBillfold,Money,Outlets
+LifeHackers’ Two Cents blog,@TwoCentsLH,Money,Outlets
+GoGirlFinance,@GoGirlFinance,Money,Outlets
+WiseBread,@WiseBread,Money,Outlets
+Get Rich Slowly,@GetRichSlowly,Money,Outlets
+Bill Gates,@BillGates,Tech,People
+Mark Cuban,@mcuban,Tech,People
+Nitasha Tiku ,@nitashatiku,Tech,People
+Marc Andreessen ,@pmarca,Tech,People
+Megan Quinn,@msquinn,Tech,People
+Brooke Hammerling ,@brooke,Tech,People
+John Legere ,@johnlegere,Tech,People
+Kara Swisher ,@karaswisher,Tech,People
+Alexia Tsotsis ,@alexia,Tech,People
+Mark Gurman ,@markgurman,Tech,People
+Tristan Walker ,@tristanwalker,Tech,People
+Jack Dorsey ,@jack,Tech,People
+Emily Chang ,@emilychangtv,Tech,People
+Farhad Manjoo,@fmanjoo,Tech,People
+Benedict Evans ,@BenedictEvans,Tech,People
+Jenna Wortham ,@jennydeluxe,Tech,People
+Elon Musk,@elonmusk,Tech,People
+Joanna Stern ,@joannastern,Tech,People
+Ben Horowitz,@bhorowitz,Tech,People
+Dan Primack ,@danprimack,Tech,People
+Shira Ovide ,@ShiraOvide,Tech,People
+Peter Kafka ,@pkafka,Tech,People
+Dick Costolo ,@dickc,Tech,People
+Dina Bass ,@dinabass,Tech,People
+Evelyn Rusli ,@EvelynRusli,Tech,People
+Keith Rabois ,@rabois,Tech,People
+Aaron Pressman,@ampressman,Tech,People
+Mike Isaac ,@mikeisaac,Tech,People
+Eric Hippeau,@erichippeau,Tech,People
+Jessica Lessin ,@jessicalessin,Tech,People
+Dennis Crowley ,@dens,Tech,People
+David Tisch,@davetisch,Tech,People
+Cindy Gallop,@cindygallop,Tech,People
+Marissa Mayer,@marissamayer,Tech,People
+Jason Del Rey,@DelRey,Tech,People
+Padmasree Warrior,@Padmasree,Tech,People
+Josh Topolsky,@joshuatopolsky,Tech,People
+Selena Larson,@selenalarson,Tech,People
+Om Malik,@om,Tech,People
+Xeni Jardin,@xeni,Tech,People
+Nilay Patel ,@reckless,Tech,People
+Kashmir Hill,@kashhill,Tech,People
+Sara Chipps ,@SaraJChipps,Tech,People
+Charles Arthur,@charlesarthur,Tech,People
+Ruzwana Bashir,@ruzwana,Tech,People
+Lora Kolodny,@lorakolodny,Tech,People
+Jeff Weiner ,@jeffweiner,Tech,People
+Courtney Boyd Myers,@CBM,Tech,People
+Sarah Lacy,@sarahcuda,Tech,People
+Ed Bott,@edbott,Tech,People
+Christopher Mims,@mims,Tech,People
+Marques Brownlee,@MKBHD,Tech,People
+Ina Fried,@inafried,Tech,People
+Sam Biddle ,@samfbiddle,Tech,People
+Megan Garber ,@megangarber,Tech,People
+Casey Newton,@CaseyNewton,Tech,People
+Nick Bilton,@nickbilton,Tech,People
+Douglas MacMillan,@dmac1,Tech,People
+Alexis Madrigal,@alexismadrigal,Tech,People
+Dan Frommer ,@fromedome,Tech,People
+Casey Johnston ,@caseyjohnston,Tech,People
+Mat Honan,@mat,Tech,People
+Leigh Alexander ,@leighalexander,Tech,People
+Baratunde Thurston,@baratunde,Tech,People
+Chris Dixon,@cdixon,Tech,People
+Meredith Perry,@meredithperry,Tech,People
+MG Siegler ,@mgsiegler,Tech,People
+Quentin Hardy,@qhardy,Tech,People
+Paul Graham,@paulg,Tech,People
+Gabe Rivera ,@gaberivera,Tech,People
+Paul Haddad ,@tapbot_paul,Tech,People
+Walt Mossberg,@waltmossberg,Tech,People
+Ryan Hoover,@rrhoover,Tech,People
+Caitlin Dewey,@caitlindewey,Tech,People
+Martin Bryant ,@MartinSFP,Tech,People
+Stacey Higginbotham,@gigastacey,Tech,People
+Robinson Meyer,@yayitsrob,Tech,People
+Fred Wilson,@fredwilson,Tech,People
+Mary Jo Foley,@maryjofoley,Tech,People
+Seth Weintraub,@llsethj,Tech,People
+Amber Gordon,@missambear,Tech,People
+Alex Wilhelm,@alex,Tech,People
+Horace Dediu,@asymco,Tech,People
+Katie Notopoulos,@katienotopoulos,Tech,People
+John Borthwick,@Borthwick,Tech,People
+TechCrunch ,@TechCrunch,Tech,Outlets
+Mashable ,@mashable,Tech,Outlets
+WIRED,@WIRED,Tech,Outlets
+Forbes Tech News ,@ForbesTech,Tech,Outlets
+The Verge,@verge,Tech,Outlets
+Gizmodo,@Gizmodo,Tech,Outlets
+Techmeme,@Techmeme,Tech,Outlets
+CNET,@CNET,Tech,Outlets
+Engadget,@engadget,Tech,Outlets
+NBC News Tech,@NBCNewsTech,Tech,Outlets
+CNET News,@CNETNews,Tech,Outlets
+Reuters Tech News ,@ReutersTech,Tech,Outlets
+BI Tech,@SAI,Tech,Outlets
+CNN Tech ,@cnntech,Tech,Outlets
+Re/code ,@Recode,Tech,Outlets
+NYTimes Bits ,@nytimesbits,Tech,Outlets
+WSJD,@WSJD,Tech,Outlets
+Breaking News Tech ,@breakingbytes,Tech,Outlets
+The Next Web ,@TheNextWeb,Tech,Outlets
+Yahoo Tech,@YahooTech,Tech,Outlets
+CNBC Tech,@CNBCtech,Tech,Outlets
+VentureBeat ,@VentureBeat,Tech,Outlets
+USA TODAY Technology,@usatodaytech,Tech,Outlets
+POLITICO MorningTech ,@MorningTech,Tech,Outlets
