@@ -1,5 +1,4 @@
 ActiveAdmin.register Influencer do
-
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
@@ -14,5 +13,17 @@ ActiveAdmin.register Influencer do
 # end
 permit_params :handle, :twitter_username, :channel_id
 
+index do
+  column :id
+  column "category" do |influencer|
+    influencer.channel.category.name
+  end
+  column :channel
+  column :twitter_username
+  column :handle
+  column :created_at
+  column :updated_at
+  actions
+end
 
 end

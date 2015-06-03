@@ -6,6 +6,8 @@ task :import_sources=> [:environment] do
   file = "db/sources.csv"
 
   Influencer.destroy_all
+  Channel.destroy_all
+  Category.destroy_all
 
   CSV.foreach(file, :headers => true) do |row|
 
@@ -17,7 +19,7 @@ task :import_sources=> [:environment] do
       )
     end
 
-    channel = Channel.where(:name => row[3]).first
+    channel = Channel.joins('INNER JOIN categories ON categories.id = channels.category_id').where("channels.name = '#{row[3]}' AND categories.name = '#{row[2]}'").first
 
     if(!channel)
       channel = Channel.create!(

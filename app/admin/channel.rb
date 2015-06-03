@@ -14,5 +14,13 @@ ActiveAdmin.register Channel do
 # end
 permit_params :name, :category
 
+index do
+  column :id
+  column :category
+  column :name
+  column :created_at
+  column :updated_at
+  actions
+end
 
 end
