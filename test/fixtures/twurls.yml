@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  influencer_id: 
+  headline_image_url: MyString
+  headline: MyString
+  description: MyString
+  url: MyString
+  share_count: 1
+  like_count: 1
+
+two:
+  influencer_id: 
+  headline_image_url: MyString
+  headline: MyString
+  description: MyString
+  url: MyString
+  share_count: 1
+  like_count: 1
