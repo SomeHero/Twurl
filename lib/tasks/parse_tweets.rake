@@ -10,6 +10,10 @@ task :parse_tweets=> [:environment] do
     config.access_token_secret = ENV['TWITTER_ACCESS_SECRET']
   end
 
+  Diffbot.configure do |config|
+    config.token = ENV["DIFFBOT_TOKEN"]
+  end
+
   users = Influencer.all
 
   users.each do |user|
@@ -32,11 +36,18 @@ task :parse_tweets=> [:environment] do
           if(urls.count > 0)
             puts "we're creating a twurl"
 
+            article = Diffbot::Article.fetch(urls.first) do |request|
+              request.summary = true # Return a summary text instead of the full text.
+            end
+
+            headline_image_url = article.media.select { |m| m["type"] == "image" }.select { |m| m["primary"] == "true" }.first.link
+
             Twurls::Twurl.create!({
               :twitter_id => tweet.id,
               :influencer => user,
-              :headline => tweet.full_text,
-              :url => urls.first
+              :headline => article.summary.truncate(255),
+              :headline_image_url => headline_image_url,
+              :url => article.resolved_url
             })
           end
         end

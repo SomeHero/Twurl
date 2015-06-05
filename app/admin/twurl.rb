@@ -24,6 +24,9 @@ index do
     twurl.influencer.handle
   end
   column :headline
+  column "Image" do |twurl|
+    image_tag twurl.headline_image_url, style: 'width: 320px;'
+  end
   column :url
   column :created_at
   column :updated_at
