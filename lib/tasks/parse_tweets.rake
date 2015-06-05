@@ -28,7 +28,7 @@ task :parse_tweets=> [:environment] do
 
       tweets.each do |tweet|
 
-        twurl = Twurls::Twurl.where(:twitter_id => tweet.id).first
+        twurl = TwurlLink.where(:twitter_id => tweet.id).first
 
         if(!twurl)
           urls = extract_urls(tweet.full_text)
@@ -42,7 +42,7 @@ task :parse_tweets=> [:environment] do
 
             headline_image_url = article.media.select { |m| m["type"] == "image" }.select { |m| m["primary"] == "true" }.first.link
 
-            Twurls::Twurl.create!({
+            TwurlLink.create!({
               :twitter_id => tweet.id,
               :influencer => user,
               :headline => article.summary.truncate(255),
