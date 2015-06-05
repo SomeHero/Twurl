@@ -43,7 +43,6 @@ task :parse_tweets=> [:environment] do
         retry
       end
     rescue
-      binding.pry
       puts "Error #{$!}"
     end
   end
