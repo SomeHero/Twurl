@@ -50,3 +50,5 @@ gem 'spring',        group: :development
 
 gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
+gem 'twitter'
+gem 'twitter-text'
