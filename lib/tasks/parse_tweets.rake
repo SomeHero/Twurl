@@ -37,7 +37,8 @@ task :parse_tweets=> [:environment] do
       end
     rescue Twitter::Error::TooManyRequests => error
       if num_attempts % 3 == 0
-        sleep(15*60) # minutes * 60 seconds
+        puts "sleeping"
+        sleep(1*60) # minutes * 60 seconds
         retry
       else
         retry
