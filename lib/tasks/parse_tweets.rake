@@ -13,10 +13,14 @@ task :parse_tweets=> [:environment] do
   users = Influencer.all
 
   users.each do |user|
+    puts user.handle
+
     num_attempts = 0
     begin
       num_attempts += 1
       tweets = client.user_timeline(user.handle, { count: 10 })
+
+      puts "we found #{tweets.count}"
 
       tweets.each do |tweet|
 
@@ -26,6 +30,8 @@ task :parse_tweets=> [:environment] do
           urls = extract_urls(tweet.full_text)
 
           if(urls.count > 0)
+            puts "we're creating a twurl"
+
             Twurls::Twurl.create!({
               :twitter_id => tweet.id,
               :influencer => user,
@@ -36,6 +42,8 @@ task :parse_tweets=> [:environment] do
         end
       end
     rescue Twitter::Error::TooManyRequests => error
+      puts "we got an #{error}"
+
       if num_attempts % 3 == 0
         puts "sleeping"
         sleep(1*60) # minutes * 60 seconds
@@ -44,7 +52,7 @@ task :parse_tweets=> [:environment] do
         retry
       end
     rescue
-      puts "Error #{$!}"
+      puts "we got an error #{$!}"
     end
   end
 end
