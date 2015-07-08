@@ -35,6 +35,7 @@ module API
       end
 
       mount API::V1::Twurls
+      mount API::V1::Categories
     end
   end
 end
