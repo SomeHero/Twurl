@@ -8,11 +8,17 @@ module API
         desc "returns all twurls"
         params do
           optional :category_id, type: Integer, desc: "Optional Category"
+          optional :page_number, type: Integer, desc: "Page Number"
         end
         get "" do
           Rails.logger.debug "Getting Twurls"
 
           offset = 0
+          number_per_page = 20
+
+          if params["page_number"] && params["page_number"].to_s.length > 0
+            offset = number_per_page * (params["page_number"].to_i - 1)
+          end
 
           if params["category_id"] && params["category_id"].to_s.length > 0
             twurls = TwurlLink.where(influencer_id: Influencer.select("id").where(channel_id: Channel.select("id").where(category_id: params["category_id"]))).offset(offset).take(20)
