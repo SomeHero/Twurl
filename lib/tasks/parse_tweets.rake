@@ -17,7 +17,10 @@ task :parse_tweets=> [:environment] do
   users = Influencer.all
 
   users.each do |user|
-    puts user.handle
+    twitter_user = client.user(user.handle)
+    user.profile_image_url = twitter_user.profile_image_url.to_s
+
+    user.save!
 
     num_attempts = 0
     begin
@@ -36,18 +39,29 @@ task :parse_tweets=> [:environment] do
           if(urls.count > 0)
             puts "we're creating a twurl"
 
-            article = Diffbot::Article.fetch(urls.first) do |request|
-              request.summary = true # Return a summary text instead of the full text.
-            end
+            #article = Diffbot::Article.fetch(urls.first) do |request|
+            #  request.summary = true # Return a summary text instead of the full text.
+            #end
 
-            headline_image_url = article.media.select { |m| m["type"] == "image" }.select { |m| m["primary"] == "true" }.first.link
+            # call api with key (you'll need a real key)
+            embedly_api = Embedly::API.new :key => 'f782cd992e754ce1b0ef53aff7628c46',
+                    :user_agent => 'Mozilla/5.0 (compatible; mytestapp/1.0; james@somehero.com)'
+            obj = embedly_api.extract :url => urls.first
+            article = obj[0]
+
+            headline_image_url = article.images[0]["url"]
+            headline_image_width = article.images[0]["width"]
+            headline_image_height = article.images[0]["height"]
 
             TwurlLink.create!({
               :twitter_id => tweet.id,
+              :original_tweet => tweet.full_text,
               :influencer => user,
-              :headline => article.summary.truncate(255),
+              :headline => article.title,
               :headline_image_url => headline_image_url,
-              :url => article.resolved_url
+              :headline_image_width => headline_image_width,
+              :headline_image_height => headline_image_height,
+              :url => article["url"]
             })
           end
         end

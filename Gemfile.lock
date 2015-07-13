@@ -89,6 +89,10 @@ GEM
       hashie (= 3.3.2)
       nokogiri (~> 1.5.0)
       yajl-ruby
+    embedly (1.9.1)
+      json
+      oauth
+      querystring
     equalizer (0.0.11)
     erubis (2.7.0)
     eventmachine (1.0.7)
@@ -185,6 +189,7 @@ GEM
     notiffany (0.0.6)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    oauth (0.4.7)
     orm_adapter (0.5.0)
     pg (0.18.2)
     polyamorous (1.2.0)
@@ -201,6 +206,7 @@ GEM
     pry-remote (0.1.8)
       pry (~> 0.9)
       slop (~> 3.0)
+    querystring (0.1.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.5.3)
@@ -336,6 +342,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   diffbot
+  embedly
   fastimage
   grape
   guard-rspec

@@ -10,6 +10,7 @@ class TwurlLink < ActiveRecord::Base
     :headline_image_url => self.headline_image_url,
     :headline => self.headline,
     :description => self.description,
+    :original_tweet => self.original_tweet,
     :url => self.url,
     :share_count => self.share_count,
     :like_count => self.like_count,

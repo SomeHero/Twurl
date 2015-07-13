@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150704030927) do
+ActiveRecord::Schema.define(version: 20150713183833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20150704030927) do
     t.datetime "updated_at"
     t.string   "twitter_username"
     t.integer  "channel_id"
+    t.string   "profile_image_url"
   end
 
   create_table "twurls", force: true do |t|
@@ -86,6 +87,7 @@ ActiveRecord::Schema.define(version: 20150704030927) do
     t.integer  "twitter_id",            limit: 8
     t.integer  "headline_image_height"
     t.integer  "headline_image_width"
+    t.string   "original_tweet"
   end
 
   add_index "twurls", ["influencer_id"], name: "index_twurls_on_influencer_id", using: :btree
