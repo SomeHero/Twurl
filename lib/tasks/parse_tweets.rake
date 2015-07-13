@@ -17,10 +17,15 @@ task :parse_tweets=> [:environment] do
   users = Influencer.all
 
   users.each do |user|
-    twitter_user = client.user(user.handle)
-    user.profile_image_url = twitter_user.profile_image_url.to_s
 
-    user.save!
+    begin
+      twitter_user = client.user(user.handle)
+      user.profile_image_url = twitter_user.profile_image_url.to_s
+
+      user.save!
+    rescue
+      puts "Error #{$!}"
+    end
 
     num_attempts = 0
     begin
