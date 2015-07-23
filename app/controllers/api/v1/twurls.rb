@@ -21,9 +21,9 @@ module API
           end
 
           if params["category_id"] && params["category_id"].to_s.length > 0
-            twurls = TwurlLink.where(influencer_id: Influencer.select("id").where(channel_id: Channel.select("id").where(category_id: params["category_id"]))).order('created_at DESC').offset(offset).take(20)
+            twurls = TwurlLink.where(display: true, influencer_id: Influencer.select("id").where(channel_id: Channel.select("id").where(category_id: params["category_id"]))).order('created_at DESC').offset(offset).take(20)
           else
-            twurls = TwurlLink.order('created_at DESC').offset(offset).take(20)
+            twurls = TwurlLink.where(display: true).order('created_at DESC').offset(offset).take(20)
           end
 
           twurls

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150723031814) do
+ActiveRecord::Schema.define(version: 20150723172130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,8 +88,10 @@ ActiveRecord::Schema.define(version: 20150723031814) do
     t.integer  "headline_image_height"
     t.integer  "headline_image_width"
     t.string   "original_tweet"
+    t.boolean  "display",                         default: true
   end
 
+  add_index "twurls", ["display"], name: "index_twurls_on_display", using: :btree
   add_index "twurls", ["influencer_id"], name: "index_twurls_on_influencer_id", using: :btree
 
   create_table "url_exceptions", force: true do |t|

@@ -1,17 +1,8 @@
 ActiveAdmin.register TwurlLink do
 
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if resource.something?
-#   permitted
-# end
+permit_params :influencer_id, :headline_image_url, :headline_image_height, :headline_image_width,
+  :headline, :description, :url, :twitter_id, :original_tweet, :display
+
 index do
   column :id
   column "category" do |twurl|
@@ -30,6 +21,7 @@ index do
   column :url
   column :created_at
   column :updated_at
+  column :display
   actions
 end
 
