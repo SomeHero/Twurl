@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150713183833) do
+ActiveRecord::Schema.define(version: 20150723031814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,5 +91,11 @@ ActiveRecord::Schema.define(version: 20150713183833) do
   end
 
   add_index "twurls", ["influencer_id"], name: "index_twurls_on_influencer_id", using: :btree
+
+  create_table "url_exceptions", force: true do |t|
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

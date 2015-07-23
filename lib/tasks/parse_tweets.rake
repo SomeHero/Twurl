@@ -14,6 +14,8 @@ task :parse_tweets=> [:environment] do
     config.token = ENV["DIFFBOT_TOKEN"]
   end
 
+  url_exceptions = UrlException.pluck(:url)
+
   users = Influencer.all
 
   users.each do |user|
@@ -48,11 +50,18 @@ task :parse_tweets=> [:environment] do
             #  request.summary = true # Return a summary text instead of the full text.
             #end
 
+            url = urls.first
+
             # call api with key (you'll need a real key)
             embedly_api = Embedly::API.new :key => 'f782cd992e754ce1b0ef53aff7628c46',
                     :user_agent => 'Mozilla/5.0 (compatible; mytestapp/1.0; james@somehero.com)'
-            obj = embedly_api.extract :url => urls.first
+            obj = embedly_api.extract :url => url
             article = obj[0]
+
+            uri = URI.parse(article.provider_url)
+
+            puts uri.host
+            next if url_exceptions.include? uri.host
 
             headline_image_url = article.images[0]["url"]
             headline_image_width = article.images[0]["width"]
