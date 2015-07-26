@@ -26,7 +26,7 @@ task :parse_tweets=> [:environment] do
 
       user.save!
     rescue
-      puts "Error #{$!}"
+      puts "Error #{$!} for #{user.handle} when checking profile image"
     end
 
     num_attempts = 0
@@ -34,7 +34,7 @@ task :parse_tweets=> [:environment] do
       num_attempts += 1
       tweets = client.user_timeline(user.handle, { count: 10 })
 
-      puts "we found #{tweets.count}"
+      puts "we found #{tweets.count} for #{user.handle}"
 
       tweets.each do |tweet|
 
@@ -81,7 +81,7 @@ task :parse_tweets=> [:environment] do
         end
       end
     rescue Twitter::Error::TooManyRequests => error
-      puts "we got an #{error}"
+      puts "we got an #{error} for #{user.handle}"
 
       if num_attempts % 3 == 0
         puts "sleeping"
@@ -91,7 +91,7 @@ task :parse_tweets=> [:environment] do
         retry
       end
     rescue
-      puts "we got an error #{$!}"
+      puts "we got an error #{$!} for #{tweet.id}"
     end
   end
 end
