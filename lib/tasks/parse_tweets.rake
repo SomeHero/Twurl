@@ -38,45 +38,49 @@ task :parse_tweets=> [:environment] do
 
       tweets.each do |tweet|
 
-        twurl = TwurlLink.where(:twitter_id => tweet.id).first
+        begin
+          twurl = TwurlLink.where(:twitter_id => tweet.id).first
 
-        if(!twurl)
-          urls = extract_urls(tweet.full_text)
+          if(!twurl)
+            urls = extract_urls(tweet.full_text)
 
-          if(urls.count > 0)
-            puts "we're creating a twurl"
+            if(urls.count > 0)
+              puts "we're creating a twurl for #{tweet.full_text}"
 
-            #article = Diffbot::Article.fetch(urls.first) do |request|
-            #  request.summary = true # Return a summary text instead of the full text.
-            #end
+              #article = Diffbot::Article.fetch(urls.first) do |request|
+              #  request.summary = true # Return a summary text instead of the full text.
+              #end
 
-            url = urls.first
+              url = urls.first
 
-            # call api with key (you'll need a real key)
-            embedly_api = Embedly::API.new :key => 'f782cd992e754ce1b0ef53aff7628c46',
-                    :user_agent => 'Mozilla/5.0 (compatible; mytestapp/1.0; james@somehero.com)'
-            obj = embedly_api.extract :url => url
-            article = obj[0]
+              # call api with key (you'll need a real key)
+              embedly_api = Embedly::API.new :key => 'f782cd992e754ce1b0ef53aff7628c46',
+                      :user_agent => 'Mozilla/5.0 (compatible; mytestapp/1.0; james@somehero.com)'
+              obj = embedly_api.extract :url => url
+              article = obj[0]
 
-            uri = URI.parse(article.provider_url)
+              uri = URI.parse(article.provider_url)
 
-            puts uri.host
-            next if url_exceptions.include? uri.host
+              puts uri.host
+              next if url_exceptions.include? uri.host
 
-            headline_image_url = article.images[0]["url"]
-            headline_image_width = article.images[0]["width"]
-            headline_image_height = article.images[0]["height"]
+              headline_image_url = article.images[0]["url"]
+              headline_image_width = article.images[0]["width"]
+              headline_image_height = article.images[0]["height"]
 
-            TwurlLink.create!({
-              :twitter_id => tweet.id,
-              :original_tweet => tweet.full_text,
-              :influencer => user,
-              :headline => article.title,
-              :headline_image_url => headline_image_url,
-              :headline_image_width => headline_image_width,
-              :headline_image_height => headline_image_height,
-              :url => article["url"]
-            })
+              TwurlLink.create!({
+                :twitter_id => tweet.id,
+                :original_tweet => tweet.full_text,
+                :influencer => user,
+                :headline => article.title,
+                :headline_image_url => headline_image_url,
+                :headline_image_width => headline_image_width,
+                :headline_image_height => headline_image_height,
+                :url => article["url"]
+              })
+            end
+          rescue
+            puts "we got an error #{$!} for #{tweet.id}"
           end
         end
       end
@@ -91,7 +95,7 @@ task :parse_tweets=> [:environment] do
         retry
       end
     rescue
-      puts "we got an error #{$!} for #{tweet.id}"
+      puts "we got an error #{$!}"
     end
   end
 end
