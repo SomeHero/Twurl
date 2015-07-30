@@ -12,7 +12,7 @@ ActiveAdmin.register Channel do
 #   permitted << :other if resource.something?
 #   permitted
 # end
-permit_params :name, :category
+permit_params :name, :category_id
 
 index do
   column :id
