@@ -1,0 +1,23 @@
+@mixin button($color: grey) {
+    background: $color;
+    border-radius: 12px;
+
+    @if $color == 'grey' {
+        border-bottom: solid 2px $black;
+    }
+}
+
+.download {
+    display: block;
+    width: 192px;
+    height: 163px;
+    margin: 0 auto;
+    background-image: url('/assets/images/download.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100%;
+
+    @include mq($from: tablet) {
+        width: 262px;
+    }
+}

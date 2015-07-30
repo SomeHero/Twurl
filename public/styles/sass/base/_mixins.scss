@@ -1,0 +1,573 @@
+// ----------------------------------------------------------
+//   UTILITIES
+// ----------------------------------------------------------
+@mixin apply-color($type, $color) {
+    @if $type == 'background' {
+        background: $color;
+    } @elseif $type == 'font' or $type == 'color' or $type == 'type' {
+        color: $color;
+    }
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: $opacity * 100;
+  filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+// ----------------------------------------------------------
+//   BUTTONS, TAGS, AND RATINGS
+// ----------------------------------------------------------
+@mixin button($type: 'default', $shadow: true) {
+    color: #fefefe;
+    font-size: 13px;
+    text-transform: uppercase;
+    background: $blue;
+    padding: 10px 20px;
+    text-align: center;
+    letter-spacing: 1.2px;
+
+    &:hover {
+        color: #fefefe;
+        background: $blue--mid;
+
+        &.button__icon {
+            @include opacity(1.0);
+        }
+    }
+
+    &.s-round {
+        @include prefixer(border-radius, $border-radius-s, webkit ms spec);
+    }
+
+    &.l-round {
+        @include prefixer(border-radius, $border-radius-l, webkit ms spec);
+    }
+
+    &.button--grey {
+        background: $grey;
+        color: $black;
+        &:hover {
+            background: $grey--mid;
+            color: $black;
+        }
+    }
+
+    &.button__icon {
+        color: #fefefe;
+        @include opacity(0.5);
+    }
+
+    @if $type == 'ghost' {
+        background: transparent;
+        border: solid 5px #fefefe;
+        border-radius: 8px;
+
+        @if $shadow {
+            box-shadow: inset 0 0 10px rgba($black, 0.5), 0 0 8px rgba($black, 0.5);
+            text-shadow: 0 0 5px rgba($black, 0.5);
+        }
+
+
+        &:hover {
+            color: #fefefe;
+            background: transparent;
+        }
+    }
+}
+
+@mixin tag($type: 'city') {
+    display: inline-block;
+    color: #fefefe;
+    text-transform: uppercase;
+    text-align: center;
+    background: $blue;
+    border-radius: $border-radius-s;
+    cursor: pointer;
+
+    @if $type == 'city' {
+        background: transparent;
+        color: $blue;
+        font-weight: 900;
+        font-size: 11px;
+        line-height: 26px;
+        letter-spacing: 2px;
+        height: 26px;
+
+        @include mq($from: tablet) {
+            color: #fefefe;
+            font-size: 9px;
+            background: $blue;
+            width: 50px;
+            margin-right: 15px;
+        }
+
+        @include mq($from: desktop) {
+            &:hover {
+                color: #fefefe;
+                background: $blue--mid;
+            }
+        }
+    }
+
+    @if $type == 'perfect-for' {
+        letter-spacing: 1px;
+        font-size: 12px;
+        width: auto;
+        background: transparent;
+        color: $blue;
+        font-weight: 600;
+        &:after {
+            content: ',\00A0'
+        }
+        @include mq($from: tablet) {
+            background: $blue;
+            color: $white;
+            padding: 10px 18px;
+            &:after {
+                content: '';
+            }
+            &:hover{
+                background: $blue--mid;
+            }
+        }
+    }
+}
+
+// @mixin rating($type: 'default', $color: 'green') {
+//     height: 50px;
+//     width: 50px;
+//
+//     @include mq($from: desktop) {
+//         width: 60px;
+//         height: 60px;
+//     }
+// }
+
+// ----------------------------------------------------------
+//   TYPOGRAPHY
+// ----------------------------------------------------------
+
+// Returns appropriate styles for small-caps or micro-caps
+@mixin caps-t($size: 'small') {
+    font-family: $museo-sans;
+    text-transform: uppercase;
+
+    @if $size == 'micro' {
+        // micro-caps
+        color: $grey;
+        font-weight: 900;
+        font-size: 8px;
+        line-height: 11px;
+    } @else {
+        // small-caps
+        color: $black;
+        font-weight: 700;
+        font-size: 11px;
+        line-height: 13px;
+    }
+}
+
+@mixin dropcap-t() {
+    text-align: center;
+    font-family: $museo-slab;
+    font-size: 50px;
+    font-weight: 600;
+    line-height: 86px;
+    width: 86px;
+    height: 86px;
+    background: #fefefe;
+    border-radius: $border-radius-l;
+    text-shadow: -3px 0 0 $blue;
+    float: left;
+    margin: 0 22px 10px 0;
+    padding-left: 3px;
+}
+
+// Applies handwritten treatment for selections of type
+@mixin handwritten-t($size: 'large') {
+    color: $black;
+    font-family: $verveine;
+    font-weight: 400;
+    text-transform: uppercase;
+
+    @if $size == 'large' {
+        font-size: 42px;
+        line-height: 40px;
+
+        @include mq($from: desktop) {
+            font-size: 80px;
+            line-height: 72px;
+        }
+    } @else if $size == 'medium' {
+        font-size: 28px;
+        line-height: 30px;
+
+        @include mq($from: desktop) {
+            font-size: 50px;
+            line-height: 50px;
+        }
+    } @else {
+        font-size: 18px;
+        line-height: 20px;
+
+        @include mq($from: desktop) {
+            font-size: 20px;
+            line-height: 22px;
+        }
+    }
+}
+
+@mixin rating-t {
+    color: $black;
+    font-family: $museo-sans;
+    font-weight: 500;
+    font-size: 20px;
+
+    @include mq($from: desktop) {
+        font-size: 22px;
+    }
+}
+
+// ----------------------------------------------------------
+//   LISTS
+// ----------------------------------------------------------
+@mixin list($type: 'plain') {
+    @if $type == 'default' {
+        list-style-type: disc;
+        margin: inherit;
+        padding: inherit;
+    } @else if $type == 'plain' {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    } @else if $type == 'bulleted' {
+        list-style-type: decimal;
+    } @else if $type == 'handwritten-bullets' {
+        list-style: none;
+        & li {
+            background: url('/static/img/handwritten-bullet.png') no-repeat top 10px left;
+            margin: 0 0 20px;
+            padding-left: 30px;
+        }
+    } @else if $type == 'horizontal' {
+        list-style-type: none;
+
+        & li {
+            display: inline-block;
+            padding: 0;
+        }
+    }
+}
+
+// ----------------------------------------------------------
+//   GENERAL
+// ----------------------------------------------------------
+
+// Size
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+// Position
+@mixin position($type, $top: null, $right: null, $bottom: null, $left: null) {
+    position: $type;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+
+//
+// Select Bourbon mixins
+// http://bourbon.io
+//
+
+// Clearfix
+@mixin clearfix {
+    &::after {
+        clear: both;
+        content: "";
+        display: table;
+    }
+}
+
+// Calc
+@mixin calc($property, $value) {
+    #{$property}: -webkit-calc(#{$value});
+    #{$property}: calc(#{$value});
+}
+
+// Placeholder
+@mixin placeholder {
+    $placeholders: ":-webkit-input" ":-moz" "-moz" "-ms-input";
+    @each $placeholder in $placeholders {
+        &:#{$placeholder}-placeholder {
+            @content;
+        }
+    }
+}
+
+
+@mixin info-border($filename, $height, $width) {
+    &.active {
+        background-image: url(../img/borders/#{$filename}.png);
+        background-size: #{$width}px #{$height}px;
+        background-repeat: no-repeat;
+        background-position: center bottom 8px;
+        width: #{$width}px;
+        @media only screen and (-webkit-min-device-pixel-ratio: 2),
+            only screen and (-moz-min-device-pixel-ratio: 2),
+            only screen and (-o-min-device-pixel-ratio: 2/1),
+            only screen and (min-device-pixel-ratio: 2),
+            only screen and (min-resolution: 192dpi),
+            only screen and (min-resolution: 2dppx){
+            & {
+                background-image: url(../img/borders/#{$filename}@2x.png);
+            }
+        }
+    }
+}
+
+@mixin aspect-ratio($width, $height) {
+    position: relative;
+    &:before{
+        display: block;
+        content: " ";
+        width: 100%;
+        padding-top: ($height / $width) * 100%;
+    }
+
+    > .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+// Prefixer
+@charset "UTF-8";
+
+// A mixin for generating vendor prefixes on non-standardized properties.
+//
+// @param {String} $property
+//   Property to prefix
+//
+// @param {*} $value
+//   Value to use
+//
+// @param {List} $prefixes
+//   Prefixes to define
+//
+// @example scss - Usage
+//   .element {
+//     @include prefixer(border-radius, 10px, webkit ms spec);
+//   }
+//
+// @example css - CSS Output
+//   .element {
+//     -webkit-border-radius: 10px;
+//     -moz-border-radius: 10px;
+//     border-radius: 10px;
+//   }
+//
+// @require {variable} $prefix-for-webkit
+// @require {variable} $prefix-for-mozilla
+// @require {variable} $prefix-for-microsoft
+// @require {variable} $prefix-for-opera
+// @require {variable} $prefix-for-spec
+
+$prefix-for-webkit:    true !default;
+$prefix-for-mozilla:   true !default;
+$prefix-for-microsoft: true !default;
+$prefix-for-opera:     true !default;
+$prefix-for-spec:      true !default;
+
+@mixin prefixer($property, $value, $prefixes) {
+    @each $prefix in $prefixes {
+        @if $prefix == webkit {
+            @if $prefix-for-webkit {
+                -webkit-#{$property}: $value;
+            }
+        } @else if $prefix == moz {
+            @if $prefix-for-mozilla {
+                -moz-#{$property}: $value;
+            }
+        } @else if $prefix == ms {
+            @if $prefix-for-microsoft {
+                -ms-#{$property}: $value;
+            }
+        } @else if $prefix == o {
+            @if $prefix-for-opera {
+                -o-#{$property}: $value;
+            }
+        } @else if $prefix == spec {
+            @if $prefix-for-spec {
+                #{$property}: $value;
+            }
+        } @else  {
+            @warn "Unrecognized prefix: #{$prefix}";
+        }
+    }
+}
+
+@mixin disable-prefix-for-all() {
+    $prefix-for-webkit:    false !global;
+    $prefix-for-mozilla:   false !global;
+    $prefix-for-microsoft: false !global;
+    $prefix-for-opera:     false !global;
+    $prefix-for-spec:      false !global;
+}
+
+
+// Transition
+// Example: @include transition (all 2s ease-in-out);
+//          @include transition (opacity 1s ease-in 2s, width 2s ease-out);
+//          @include transition-property (transform, opacity);
+
+@mixin transition($properties...) {
+    // Fix for vendor-prefix transform property
+    $needs-prefixes: false;
+    $webkit: ();
+    $moz: ();
+    $spec: ();
+
+    // Create lists for vendor-prefixed transform
+    @each $list in $properties {
+        @if nth($list, 1) == "transform" {
+            $needs-prefixes: true;
+            $list1: -webkit-transform;
+            $list2: -moz-transform;
+            $list3: ();
+
+            @each $var in $list {
+                $list3: join($list3, $var);
+
+                @if $var != "transform" {
+                    $list1: join($list1, $var);
+                    $list2: join($list2, $var);
+                }
+            }
+
+            $webkit: append($webkit, $list1);
+            $moz:    append($moz,    $list2);
+            $spec:   append($spec,   $list3);
+        } @else {
+            $webkit: append($webkit, $list, comma);
+            $moz:    append($moz,    $list, comma);
+            $spec:   append($spec,   $list, comma);
+        }
+    }
+
+    @if $needs-prefixes {
+        -webkit-transition: $webkit;
+        -moz-transition: $moz;
+        transition: $spec;
+    } @else {
+        @if length($properties) >= 1 {
+            @include prefixer(transition, $properties, webkit moz spec);
+        } @else {
+            $properties: all 0.15s ease-out 0s;
+            @include prefixer(transition, $properties, webkit moz spec);
+        }
+    }
+}
+
+@mixin transition-property($properties...) {
+    -webkit-transition-property: transition-property-names($properties, "webkit");
+    -moz-transition-property: transition-property-names($properties, "moz");
+    transition-property: transition-property-names($properties, false);
+}
+
+@mixin transition-duration($times...) {
+    @include prefixer(transition-duration, $times, webkit moz spec);
+}
+
+@mixin transition-timing-function($motions...) {
+    // ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier()
+    @include prefixer(transition-timing-function, $motions, webkit moz spec);
+}
+
+@mixin transition-delay($times...) {
+    @include prefixer(transition-delay, $times, webkit moz spec);
+}
+
+// Appearance
+@mixin appearance($value) {
+    @include prefixer(appearance, $value, webkit moz ms o spec);
+}
+
+// Transform
+@mixin transform($property: none) {
+    // none | <transform-function>
+    @include prefixer(transform, $property, webkit moz ms o spec);
+}
+
+@mixin transform-origin($axes: 50%) {
+    // x-axis - left | center | right  | length | %
+    // y-axis - top  | center | bottom | length | %
+    // z-axis -                          length
+    @include prefixer(transform-origin, $axes, webkit moz ms o spec);
+}
+
+@mixin transform-style($style: flat) {
+    @include prefixer(transform-style, $style, webkit moz ms o spec);
+}
+
+// Backface visibility
+@mixin backface-visibility($visibility) {
+    @include prefixer(backface-visibility, $visibility, webkit spec);
+}
+
+// Perspective
+@mixin perspective($depth: none) {
+    // none | <length>
+    @include prefixer(perspective, $depth, webkit moz spec);
+}
+
+@mixin perspective-origin($value: 50% 50%) {
+    @include prefixer(perspective-origin, $value, webkit moz spec);
+}
+
+// Placeholder Image from placehold.it
+@mixin placeholder-image($size, $bgcolor:'', $textcolor:'', $text:'') {
+    @if $bgcolor != '' and $textcolor != '' {
+        $bgcolor: '/#{$bgcolor}';
+        $textcolor: '/#{$textcolor}';
+    }
+    @if $text != '' {
+        $text: '?text=#{$text}';
+    }
+    background-image: url(http://placehold.it/#{$size}#{$bgcolor}#{$textcolor}#{$text});
+}
+
+@mixin background-image($filename) {
+    background-image: url(../img/#{$filename}.png);
+    background-size: cover;
+    @media only screen and (-webkit-min-device-pixel-ratio: 2),
+        only screen and (-moz-min-device-pixel-ratio: 2),
+        only screen and (-o-min-device-pixel-ratio: 2/1),
+        only screen and (min-device-pixel-ratio: 2),
+        only screen and (min-resolution: 192dpi),
+        only screen and (min-resolution: 2dppx){
+        & {
+            background-image: url(../img/#{$filename}@2x.png);
+        }
+    }
+}
+
+// Dotted border
+// Certainly theres a better way, but border-image effects all sides
+// while we just need top and bottom
+@mixin dotted-border() {
+    font-size: 16px;
+    overflow: hidden;
+    content:'•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••';
+    display: block;
+    letter-spacing: 6px;
+    color: $grey--mid;
+    line-height: 6px;
+}

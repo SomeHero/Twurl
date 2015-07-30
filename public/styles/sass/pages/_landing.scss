@@ -1,0 +1,36 @@
+.cut-the-noise {
+    display: block;
+    margin: 0;
+
+    img {
+        display: block;
+    }
+
+    .illustration {
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        margin: 0 auto 15px;
+
+        @include mq($from: tablet) {
+            margin: 0 auto 50px;
+        }
+    }
+
+    figcaption {
+        display: block;
+        text-align: center;
+        color: #ffffff;
+        font-size: 20px;
+        width: 100%;
+
+        @include mq($from: tablet) {
+            font-size: 36px;
+            line-height: 50px;
+        }
+
+        strong {
+            font-weight: bold;
+        }
+    }
+}

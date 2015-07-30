@@ -1,0 +1,14 @@
+body {
+    background: $blue;
+}
+
+main {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+
+    @include mq($from: tablet) {
+        width: 80%;
+        max-width: 1200px;
+    }
+}

@@ -1,0 +1,32 @@
+body {
+    font-family: "jaf-facitweb", sans-serif;
+    line-height: 1.618;
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+
+    &.logo {
+        text-indent: -99999px;
+        width: 199px;
+        height: 77px;
+        background-image: url('/assets/images/logo.png');
+        background-repeat: no-repeat;
+        background-size: 100%;
+        margin: 0 auto;
+
+        @include mq($from: tablet) {
+            float: left;
+        }
+
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            background-image: url('/assets/images/logo@2x.png');
+        }
+    }
+}
+
+a {
+    text-decoration: none;
+    color: $blue--dark;
+}
