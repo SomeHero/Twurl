@@ -13,9 +13,13 @@ ActiveAdmin.register Influencer do
 # end
 permit_params :handle, :twitter_username, :channel_id
 
+filter :channel
+filter :handle
+filter :twitter_username
+
 index do
   column :id
-  column "category" do |influencer|
+  column "Category" do |influencer|
     influencer.channel.category.name
   end
   column :channel

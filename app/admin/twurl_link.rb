@@ -1,5 +1,10 @@
 ActiveAdmin.register TwurlLink do
 
+filter :headline
+filter :url
+filter :created_at
+filter :display
+
 permit_params :influencer_id, :headline_image_url, :headline_image_height, :headline_image_width,
   :headline, :description, :url, :twitter_id, :original_tweet, :display
 
