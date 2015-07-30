@@ -11,7 +11,7 @@ permit_params :influencer_id, :headline_image_url, :headline_image_height, :head
 index do
   column :id
   column "category" do |twurl|
-    twurl.influencer.channel.category.name
+    twurl.influencer.channel.category.name if twurl.influencer
   end
   column "channel" do |twurl|
     twurl.influencer.channel.name
