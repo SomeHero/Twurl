@@ -14,10 +14,10 @@ index do
     twurl.influencer.channel.category.name if twurl.influencer
   end
   column "channel" do |twurl|
-    twurl.influencer.channel.name
+    twurl.influencer.channel.name if twurl.influencer
   end
   column "source" do |twurl|
-    twurl.influencer.handle
+    twurl.influencer.handle if twurl.influencer
   end
   column :headline
   column "Image" do |twurl|
