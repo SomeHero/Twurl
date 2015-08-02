@@ -20,22 +20,18 @@ task :parse_tweets=> [:environment] do
 
   first_influencer_parsed_id = 0
   last_influencer_parsed_id = 0
+  start_influencer_id = 1
   number_of_twurls_created = 0
   number_of_twurls_errors = 0
   rate_limited = false
 
   if last_parse_audit && last_parse_audit.last_influencer_parsed_id
-    last_influencer_parsed_id = last_parse_audit.last_influencer_parsed_id
+    start_influencer_id = last_parse_audit.last_influencer_parsed_id + 1
   end
 
-  users = Influencer.where("id > ?", last_influencer_parsed_id).order("id asc")
+  users = Influencer.where("id >= ?", start_influencer_id).order("id asc")
 
   first_influencer_parsed_id = users.first.id
-
-  parse_twurls_batch_audit = ParseTwurlsBatchAudit.create!({
-    :twurls_created => number_of_twurls_created,
-    :twurls_errors => number_of_twurls_errors
-  })
 
   users.each do |user|
     break if rate_limited
@@ -111,22 +107,21 @@ task :parse_tweets=> [:environment] do
     rescue Twitter::Error::TooManyRequests => error
       puts "we got rate limited #{error}"
 
-      parse_twurls_batch_audit.twurls_created = number_of_twurls_created
-      parse_twurls_batch_audit.twurls_errors = number_of_twurls_errors
-      parse_twurls_batch_audit.save!
-
       rate_limited = true
       next
     rescue
       puts "we got an error #{$!}"
     end
 
-    if first_influencer_parsed_id == user.id
-      parse_twurls_batch_audit.first_influencer_parsed_id = first_influencer_parsed_id
-    end
-    parse_twurls_batch_audit.last_influencer_parsed_id = user.id
-    parse_twurls_batch_audit.twurls_created = number_of_twurls_created
-    parse_twurls_batch_audit.twurls_errors = number_of_twurls_errors
-    parse_twurls_batch_audit.save!
+    last_influencer_parsed_id = user.id
+  end
+
+  if last_influencer_parsed_id != 0
+    ParseTwurlsBatchAudit.create!({
+      :twurls_created => number_of_twurls_created,
+      :twurls_errors => number_of_twurls_errors,
+      :first_influencer_parsed_id => first_influencer_parsed_id,
+      :last_influencer_parsed_id => last_influencer_parsed_id
+    })
   end
 end
