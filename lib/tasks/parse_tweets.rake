@@ -24,8 +24,6 @@ task :parse_tweets=> [:environment] do
   number_of_twurls_errors = 0
   rate_limited = false
 
-  binding.pry
-
   if last_parse_audit && last_parse_audit.last_influencer_parsed_id
     last_influencer_parsed_id = last_parse_audit.last_influencer_parsed_id
   end
@@ -53,7 +51,6 @@ task :parse_tweets=> [:environment] do
       puts "Error #{$!}"
     end
 
-    binding.pry
     begin
       tweets = client.user_timeline(user.handle, { count: 10 })
 
