@@ -16,22 +16,45 @@ task :parse_tweets=> [:environment] do
 
   url_exceptions = UrlException.pluck(:url)
 
-  users = Influencer.all
+  last_parse_audit = ParseTwurlsBatchAudit.last
+
+  first_influencer_parsed_id = 0
+  last_influencer_parsed_id = 0
+  number_of_twurls_created = 0
+  number_of_twurls_errors = 0
+  rate_limited = false
+
+  binding.pry
+
+  if last_parse_audit && last_parse_audit.last_influencer_parsed_id
+    last_influencer_parsed_id = last_parse_audit.last_influencer_parsed_id
+  end
+
+  users = Influencer.where("id > ?", last_influencer_parsed_id).order("id asc")
+
+  first_influencer_parsed_id = users.first.id
+
+  parse_twurls_batch_audit = ParseTwurlsBatchAudit.create!({
+    :twurls_created => number_of_twurls_created,
+    :twurls_errors => number_of_twurls_errors
+  })
 
   users.each do |user|
+    break if rate_limited
 
     begin
       twitter_user = client.user(user.handle)
       user.profile_image_url = twitter_user.profile_image_url.to_s
 
       user.save!
+    rescue Twitter::Error::TooManyRequests => error
+      puts "we got an error: #{error}"
     rescue
       puts "Error #{$!}"
     end
 
-    num_attempts = 0
+    binding.pry
     begin
-      num_attempts += 1
       tweets = client.user_timeline(user.handle, { count: 10 })
 
       puts "we found #{tweets.count}"
@@ -67,31 +90,46 @@ task :parse_tweets=> [:environment] do
             headline_image_width = article.images[0]["width"]
             headline_image_height = article.images[0]["height"]
 
-            TwurlLink.create!({
-              :twitter_id => tweet.id,
-              :original_tweet => tweet.full_text,
-              :influencer => user,
-              :headline => article.title,
-              :headline_image_url => headline_image_url,
-              :headline_image_width => headline_image_width,
-              :headline_image_height => headline_image_height,
-              :url => article["url"]
-            })
+            begin
+              TwurlLink.create!({
+                :twitter_id => tweet.id,
+                :original_tweet => tweet.full_text,
+                :influencer => user,
+                :headline => article.title,
+                :headline_image_url => headline_image_url,
+                :headline_image_width => headline_image_width,
+                :headline_image_height => headline_image_height,
+                :url => article["url"]
+              })
+
+              number_of_twurls_created += 1
+            rescue
+              puts "we got an error #{$!}"
+
+              number_of_twurls_errors += 1
+            end
           end
         end
       end
     rescue Twitter::Error::TooManyRequests => error
-      puts "we got an #{error}"
+      puts "we got rate limited #{error}"
 
-      if num_attempts % 3 == 0
-        puts "sleeping"
-        sleep(1*60) # minutes * 60 seconds
-        retry
-      else
-        retry
-      end
+      parse_twurls_batch_audit.twurls_created = number_of_twurls_created
+      parse_twurls_batch_audit.twurls_errors = number_of_twurls_errors
+      parse_twurls_batch_audit.save!
+
+      rate_limited = true
+      next
     rescue
       puts "we got an error #{$!}"
     end
+
+    if first_influencer_parsed_id == user.id
+      parse_twurls_batch_audit.first_influencer_parsed_id = first_influencer_parsed_id
+    end
+    parse_twurls_batch_audit.last_influencer_parsed_id = user.id
+    parse_twurls_batch_audit.twurls_created = number_of_twurls_created
+    parse_twurls_batch_audit.twurls_errors = number_of_twurls_errors
+    parse_twurls_batch_audit.save!
   end
 end

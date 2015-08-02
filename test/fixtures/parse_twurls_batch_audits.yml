@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  twurls_created: 1
+  twurls_errors: 1
+  first_influencer_parsed_id: 1
+  last_influencer_parsed_id: 1
+
+two:
+  twurls_created: 1
+  twurls_errors: 1
+  first_influencer_parsed_id: 1
+  last_influencer_parsed_id: 1
