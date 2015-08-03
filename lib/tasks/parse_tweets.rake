@@ -34,7 +34,7 @@ task :parse_tweets=> [:environment] do
   if users.count > 0
     first_influencer_parsed_id = users.first.id
   else
-    first_influencer_parsed_id = 0
+    start_influencer_parsed_id = 0
     users = Influencer.where("id >= ?", start_influencer_id).order("id asc")
   end
 
