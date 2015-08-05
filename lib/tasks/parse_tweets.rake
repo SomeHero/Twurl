@@ -57,7 +57,7 @@ task :parse_tweets=> [:environment] do
 
       tweets.each do |tweet|
 
-        user = Influencer.where(:twitter_username => tweet.user.screen_name).first
+        user = Influencer.where(:handle => "@#{tweet.user.screen_name}").first
 
         if !user
           puts "we couldn't find an influencer #{tweet.user.screen_name}"
