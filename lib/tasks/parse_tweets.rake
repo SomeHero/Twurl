@@ -67,7 +67,6 @@ task :parse_tweets=> [:environment] do
           urls = extract_urls(tweet.full_text)
 
           if(urls.count > 0)
-            puts "we're creating a twurl"
 
             #article = Diffbot::Article.fetch(urls.first) do |request|
             #  request.summary = true # Return a summary text instead of the full text.
@@ -89,6 +88,9 @@ task :parse_tweets=> [:environment] do
             headline_image_url = article.images[0]["url"]
             headline_image_width = article.images[0]["width"]
             headline_image_height = article.images[0]["height"]
+
+
+              puts "we're creating a twurl"
 
               begin
               TwurlLink.create!({
