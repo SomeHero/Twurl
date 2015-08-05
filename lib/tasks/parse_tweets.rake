@@ -95,6 +95,11 @@ task :parse_tweets=> [:environment] do
               next
             end
 
+            if !article.images
+              "there were no images"
+              next
+            end
+            
             headline_image_url = article.images[0]["url"]
             headline_image_width = article.images[0]["width"]
             headline_image_height = article.images[0]["height"]
