@@ -59,12 +59,19 @@ task :parse_tweets=> [:environment] do
 
         user = Influencer.where(:twitter_username => tweet.user.screen_name).first
 
-        next if !user
+        if !user
+          puts "we couldn't find an influencer #{tweet.user.screen_name}"
+          next
+        end
 
         twurl = TwurlLink.where(:twitter_id => tweet.id).first
 
         if(!twurl)
           urls = extract_urls(tweet.full_text)
+
+          if(urls.count == 0)
+            puts "this tweet is not a twurl"
+          end
 
           if(urls.count > 0)
 
@@ -83,16 +90,17 @@ task :parse_tweets=> [:environment] do
             uri = URI.parse(article.provider_url)
 
             puts uri.host
-            next if url_exceptions.include? uri.host
+            if url_exceptions.include? uri.host
+              puts "this tweet is on the exclusing list #{uri.host}"
+              next
+            end
 
             headline_image_url = article.images[0]["url"]
             headline_image_width = article.images[0]["width"]
             headline_image_height = article.images[0]["height"]
+            puts "we're creating a twurl"
 
-
-              puts "we're creating a twurl"
-
-              begin
+            begin
               TwurlLink.create!({
                 :twitter_id => tweet.id,
                 :original_tweet => tweet.full_text,
@@ -105,6 +113,7 @@ task :parse_tweets=> [:environment] do
               })
 
               number_of_twurls_created += 1
+              puts "we created #{number_of_twurls_created}"
             rescue
               puts "we got an error #{$!}"
 
