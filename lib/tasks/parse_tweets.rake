@@ -36,26 +36,30 @@ task :parse_tweets=> [:environment] do
     users = Influencer.where("id >= ?", start_influencer_id).order("id asc")
   end
 
-  users.each do |user|
-    break if rate_limited
-
-    begin
-      twitter_user = client.user(user.handle)
-      user.profile_image_url = twitter_user.profile_image_url.to_s
-
-      user.save!
-    rescue Twitter::Error::TooManyRequests => error
-      puts "we got an error: #{error}"
-    rescue
-      puts "Error #{$!}"
-    end
-
-    begin
-      tweets = client.user_timeline(user.handle, { count: 10 })
+  # users.each do |user|
+  #   break if rate_limited
+  #
+  #   begin
+  #     twitter_user = client.user(user.handle)
+  #     user.profile_image_url = twitter_user.profile_image_url.to_s
+  #
+  #     user.save!
+  #   rescue Twitter::Error::TooManyRequests => error
+  #     puts "we got an error: #{error}"
+  #   rescue
+  #     puts "Error #{$!}"
+  #   end
+  #
+  #   begin
+      tweets = client.home_timeline() #user_timeline("@twurl_app", { count: 200 })
 
       puts "we found #{tweets.count}"
 
       tweets.each do |tweet|
+
+        user = Influencer.where(:twitter_username => tweet.user.screen_name).first
+
+        next if !user
 
         twurl = TwurlLink.where(:twitter_id => tweet.id).first
 
@@ -86,7 +90,7 @@ task :parse_tweets=> [:environment] do
             headline_image_width = article.images[0]["width"]
             headline_image_height = article.images[0]["height"]
 
-            begin
+              begin
               TwurlLink.create!({
                 :twitter_id => tweet.id,
                 :original_tweet => tweet.full_text,
@@ -106,25 +110,25 @@ task :parse_tweets=> [:environment] do
             end
           end
         end
-      end
-    rescue Twitter::Error::TooManyRequests => error
-      puts "we got rate limited #{error}"
-
-      rate_limited = true
-      next
-    rescue
-      puts "we got an error #{$!}"
-    end
-
-    last_influencer_parsed_id = user.id
+    #   end
+    # rescue Twitter::Error::TooManyRequests => error
+    #   puts "we got rate limited #{error}"
+    #
+    #   rate_limited = true
+    #   next
+    # rescue
+    #   puts "we got an error #{$!}"
+    # end
+    #
+    # last_influencer_parsed_id = user.id
   end
 
-  if last_influencer_parsed_id != 0
-    ParseTwurlsBatchAudit.create!({
-      :twurls_created => number_of_twurls_created,
-      :twurls_errors => number_of_twurls_errors,
-      :first_influencer_parsed_id => first_influencer_parsed_id,
-      :last_influencer_parsed_id => last_influencer_parsed_id
-    })
-  end
+  # if last_influencer_parsed_id != 0
+  #   ParseTwurlsBatchAudit.create!({
+  #     :twurls_created => number_of_twurls_created,
+  #     :twurls_errors => number_of_twurls_errors,
+  #     :first_influencer_parsed_id => first_influencer_parsed_id,
+  #     :last_influencer_parsed_id => last_influencer_parsed_id
+  #   })
+  # end
 end
