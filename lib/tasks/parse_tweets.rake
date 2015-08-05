@@ -99,10 +99,17 @@ task :parse_tweets=> [:environment] do
               "there were no images"
               next
             end
+
+            begin
+              headline_image_url = article.images[0]["url"]
+              headline_image_width = article.images[0]["width"]
+              headline_image_height = article.images[0]["height"]
+            rescue
+              puts "we've got an issue parsing the article"
+
+              next
+            end
             
-            headline_image_url = article.images[0]["url"]
-            headline_image_width = article.images[0]["width"]
-            headline_image_height = article.images[0]["height"]
             puts "we're creating a twurl"
 
             begin
