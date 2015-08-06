@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802031239) do
+ActiveRecord::Schema.define(version: 20150804155849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,17 @@ ActiveRecord::Schema.define(version: 20150802031239) do
 
   add_index "channels", ["category_id"], name: "index_channels_on_category_id", using: :btree
 
+  create_table "influencer_event_daily_summaries", force: true do |t|
+    t.integer  "influencer_id"
+    t.string   "influencer_event_name"
+    t.integer  "count"
+    t.date     "event_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "influencer_event_daily_summaries", ["influencer_id"], name: "index_influencer_event_daily_summaries_on_influencer_id", using: :btree
+
   create_table "influencers", force: true do |t|
     t.string   "handle"
     t.datetime "created_at"
@@ -82,6 +93,26 @@ ActiveRecord::Schema.define(version: 20150802031239) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "twurl_event_daily_summaries", force: true do |t|
+    t.integer  "twurl_link_id"
+    t.string   "twurl_event_name"
+    t.integer  "count"
+    t.date     "event_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "twurl_event_daily_summaries", ["twurl_link_id"], name: "index_twurl_event_daily_summaries_on_twurl_link_id", using: :btree
+
+  create_table "twurl_events", force: true do |t|
+    t.integer  "twurl_link_id"
+    t.string   "twurl_event_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "twurl_events", ["twurl_link_id"], name: "index_twurl_events_on_twurl_link_id", using: :btree
 
   create_table "twurls", force: true do |t|
     t.integer  "influencer_id"

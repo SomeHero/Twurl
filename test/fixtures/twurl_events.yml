@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  twurl_link_id: 
+  twurl_event_name: MyString
+
+two:
+  twurl_link_id: 
+  twurl_event_name: MyString

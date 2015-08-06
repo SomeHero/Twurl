@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  twurl_link_id: 
+  twurl_event_name: MyString
+  count: 1
+  event_date: 2015-08-04
+
+two:
+  twurl_link_id: 
+  twurl_event_name: MyString
+  count: 1
+  event_date: 2015-08-04

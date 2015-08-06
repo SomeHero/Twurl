@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  influencer_id: 
+  influencer_event_name: MyString
+  count: 1
+  event_date: 2015-08-04
+
+two:
+  influencer_id: 
+  influencer_event_name: MyString
+  count: 1
+  event_date: 2015-08-04
