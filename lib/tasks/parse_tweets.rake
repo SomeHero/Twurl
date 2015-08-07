@@ -64,6 +64,13 @@ task :parse_tweets=> [:environment] do
           next
         end
 
+        if user.profile_image_url != tweet.user.profile_image_url.to_s
+          puts "updating Influencer profile image"
+
+          user.profile_image_url = tweet.user.profile_image_url.to_s
+          user.save!
+        end
+
         twurl = TwurlLink.where(:twitter_id => tweet.id).first
 
         if(!twurl)
@@ -109,7 +116,7 @@ task :parse_tweets=> [:environment] do
 
               next
             end
-            
+
             puts "we're creating a twurl"
 
             begin
