@@ -1,73 +1,41 @@
 include Twitter::Extractor
 
-desc "Parse Tweets from Users"
-task :parse_tweets=> [:environment] do
+desc "Parse Tweets for Users"
+task :parse_user_tweets=> [:environment] do
 
   client = Twitter::REST::Client.new do |config|
     config.consumer_key = ENV['TWITTER_CONSUMER_KEY']
     config.consumer_secret = ENV['TWITTER_CONSUMER_SECRET']
-    config.access_token = ENV['TWITTER_ACCESS_TOKEN']
-    config.access_token_secret = ENV['TWITTER_ACCESS_SECRET']
   end
 
   Diffbot.configure do |config|
     config.token = ENV["DIFFBOT_TOKEN"]
   end
 
-  url_exceptions = UrlException.pluck(:url)
-
-  last_parse_audit = ParseTwurlsBatchAudit.last
-
-  first_influencer_parsed_id = 0
-  last_influencer_parsed_id = 0
-  start_influencer_id = 1
   number_of_twurls_created = 0
   number_of_twurls_errors = 0
-  rate_limited = false
+  url_exceptions = UrlException.pluck(:url)
 
-  feed = Feed.where(:is_public => true).first
+  users = User.all
 
-  if !feed
-    puts "we can't find a feed"
-  end
-  if last_parse_audit && last_parse_audit.last_influencer_parsed_id
-    start_influencer_id = last_parse_audit.last_influencer_parsed_id + 1
-  end
-  users = Influencer.where("id >= ?", start_influencer_id).order("id asc")
-  if users.count > 0
-    first_influencer_parsed_id = users.first.id
-  else
-    start_influencer_id = 0
-    users = Influencer.where("id >= ?", start_influencer_id).order("id asc")
-  end
+  users.each do |user|
 
-  # users.each do |user|
-  #   break if rate_limited
-  #
-  #   begin
-  #     twitter_user = client.user(user.handle)
-  #     user.profile_image_url = twitter_user.profile_image_url.to_s
-  #
-  #     user.save!
-  #   rescue Twitter::Error::TooManyRequests => error
-  #     puts "we got an error: #{error}"
-  #   rescue
-  #     puts "Error #{$!}"
-  #   end
-  #
-  #   begin
+    feed = user.feeds.first
+
+    if !feed
+      puts "we were unable to find a feed"
+
+      next
+    end
+
+    client.access_token = user.twitter_auth_token
+    client.access_token_secret = user.twitter_secret
+
       tweets = client.home_timeline() #user_timeline("@twurl_app", { count: 200 })
 
       puts "we found #{tweets.count}"
 
       tweets.each do |tweet|
-
-        user = Influencer.where(:handle => "@#{tweet.user.screen_name}").first
-
-        if !user
-          puts "we couldn't find an influencer #{tweet.user.screen_name}"
-          next
-        end
 
         twurl = TwurlLink.where(:twitter_id => tweet.id).first
 
@@ -121,7 +89,6 @@ task :parse_tweets=> [:environment] do
               twurl = TwurlLink.create!({
                 :twitter_id => tweet.id,
                 :original_tweet => tweet.full_text,
-                :influencer => user,
                 :headline => article.title,
                 :headline_image_url => headline_image_url,
                 :headline_image_width => headline_image_width,
@@ -130,7 +97,7 @@ task :parse_tweets=> [:environment] do
               })
 
               feed.twurls << twurl
-              
+
               number_of_twurls_created += 1
               puts "we created #{number_of_twurls_created}"
             rescue
@@ -140,17 +107,7 @@ task :parse_tweets=> [:environment] do
             end
           end
         end
-    #   end
-    # rescue Twitter::Error::TooManyRequests => error
-    #   puts "we got rate limited #{error}"
-    #
-    #   rate_limited = true
-    #   next
-    # rescue
-    #   puts "we got an error #{$!}"
-    # end
-    #
-    # last_influencer_parsed_id = user.id
+    end
   end
 
   # if last_influencer_parsed_id != 0

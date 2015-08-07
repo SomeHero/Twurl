@@ -34,9 +34,10 @@ module API
         end
       end
 
+      mount API::V1::Categories
       mount API::V1::Twurls
       mount API::V1::TwurlEvents
-      mount API::V1::Categories
+      mount API::V1::Users
     end
   end
 end

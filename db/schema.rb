@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804155849) do
+ActiveRecord::Schema.define(version: 20150807042336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,26 @@ ActiveRecord::Schema.define(version: 20150804155849) do
   end
 
   add_index "channels", ["category_id"], name: "index_channels_on_category_id", using: :btree
+
+  create_table "feeds", force: true do |t|
+    t.string   "feed_name"
+    t.integer  "user_id"
+    t.boolean  "is_public"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "feeds", ["user_id"], name: "index_feeds_on_user_id", using: :btree
+
+  create_table "feeds_twurl_links", id: false, force: true do |t|
+    t.integer "twurl_link_id", null: false
+    t.integer "feed_id",       null: false
+  end
+
+  create_table "feeds_twurls", id: false, force: true do |t|
+    t.integer "feed_id",       null: false
+    t.integer "twurl_link_id", null: false
+  end
 
   create_table "influencer_event_daily_summaries", force: true do |t|
     t.integer  "influencer_id"
@@ -134,8 +154,25 @@ ActiveRecord::Schema.define(version: 20150804155849) do
   add_index "twurls", ["display"], name: "index_twurls_on_display", using: :btree
   add_index "twurls", ["influencer_id"], name: "index_twurls_on_influencer_id", using: :btree
 
+  create_table "twurls_feeds", id: false, force: true do |t|
+    t.integer "twurl_id"
+    t.integer "feed_id"
+  end
+
   create_table "url_exceptions", force: true do |t|
     t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "twitter_id"
+    t.string   "twitter_username"
+    t.string   "twitter_auth_token"
+    t.string   "twitter_secret"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email_address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

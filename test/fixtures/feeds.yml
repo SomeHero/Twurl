@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  feed_name: MyString
+  user_id: 
+  is_public: 
+
+two:
+  feed_name: MyString
+  user_id: 
+  is_public: 

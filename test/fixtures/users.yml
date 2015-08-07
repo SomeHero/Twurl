@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  twitter_id: 1
+  twitter_username: MyString
+  twitter_auth_token: MyString
+  twitter_secret: MyString
+  first_name: MyString
+  last_name: MyString
+  email_address: MyString
+
+two:
+  twitter_id: 1
+  twitter_username: MyString
+  twitter_auth_token: MyString
+  twitter_secret: MyString
+  first_name: MyString
+  last_name: MyString
+  email_address: MyString

@@ -2,6 +2,9 @@ class TwurlLink < ActiveRecord::Base
   self.table_name = "twurls"
 
   belongs_to :influencer
+  has_many :feedorizations
+  has_many :feeds, :through => :feedorizations
+  has_and_belongs_to_many :feeds
 
   def as_json(options={})
   {
