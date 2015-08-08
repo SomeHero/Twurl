@@ -11,7 +11,7 @@ ActiveAdmin.register Influencer do
 #   permitted << :other if resource.something?
 #   permitted
 # end
-permit_params :handle, :twitter_username, :channel_id
+permit_params :handle, :twitter_username, :channel_id, :profile_image_url
 
 filter :channel
 filter :handle
