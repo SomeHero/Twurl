@@ -89,7 +89,7 @@ task :parse_user_tweets=> [:environment] do
 
             if !source
               source = Source.create!({
-                :twitter_username => tweet.user.screen_name,
+                :twitter_username => "@#{tweet.user.screen_name}",
                 :handle => tweet.user.name,
                 :profile_image_url => tweet.user.profile_image_url.to_s
               })
