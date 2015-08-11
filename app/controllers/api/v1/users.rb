@@ -18,23 +18,35 @@ module API
         post "" do
           Rails.logger.debug "Creating a Twurl User"
 
-          user = User.create!({
-              :twitter_id => params["twitter_id"],
-              :twitter_username => params["twitter_username"],
-              :twitter_auth_token => params["twitter_auth_token"],
-              :twitter_secret => params["twitter_secret"],
-              :first_name => params["first_name"],
-              :last_name => params["last_name"],
-              :email_address => params["email_address"]
-          })
+          user = User.where(:twitter_id => params["twitter_id"]).first
 
-          feed = Feed.create!({
-            feed_name: "Twurl Feed #{user.id.to_s}",
-            user: user,
-            is_public: false
-          })
+          if !user
+            user = User.create!({
+                :twitter_id => params["twitter_id"],
+                :twitter_username => params["twitter_username"],
+                :twitter_auth_token => params["twitter_auth_token"],
+                :twitter_secret => params["twitter_secret"],
+                :first_name => params["first_name"],
+                :last_name => params["last_name"],
+                :email_address => params["email_address"]
+            })
 
-          return { success: true }
+            feed = Feed.create!({
+              feed_name: "Twurl Feed #{user.id.to_s}",
+              user: user,
+              is_public: false
+            })
+          else
+            user.twitter_auth_token = params["twitter_auth_token"]
+            user.twitter_secret = params["twitter_secret"]
+            user.first_name = params["first_name"]
+            user.last_name = params["last_name"]
+            user.email_address = params["email_address"]
+
+            user.save!
+          end
+
+          user
         end
 
         desc "returns all twurls in the users private feed"

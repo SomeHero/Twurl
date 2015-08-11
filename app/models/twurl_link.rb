@@ -1,7 +1,7 @@
 class TwurlLink < ActiveRecord::Base
   self.table_name = "twurls"
 
-  belongs_to :influencer
+  belongs_to :source
   has_many :feedorizations
   has_many :feeds, :through => :feedorizations
   has_and_belongs_to_many :feeds
@@ -9,7 +9,7 @@ class TwurlLink < ActiveRecord::Base
   def as_json(options={})
   {
     :id => self.id,
-    :influencer => self.influencer,
+    :influencer => self.source,
     :headline_image_url => self.headline_image_url,
     :headline => self.headline,
     :description => self.description,

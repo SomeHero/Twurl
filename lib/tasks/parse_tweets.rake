@@ -33,12 +33,12 @@ task :parse_tweets=> [:environment] do
   if last_parse_audit && last_parse_audit.last_influencer_parsed_id
     start_influencer_id = last_parse_audit.last_influencer_parsed_id + 1
   end
-  users = Influencer.where("id >= ?", start_influencer_id).order("id asc")
+  users = Source.where("id >= ?", start_influencer_id).order("id asc")
   if users.count > 0
     first_influencer_parsed_id = users.first.id
   else
     start_influencer_id = 0
-    users = Influencer.where("id >= ?", start_influencer_id).order("id asc")
+    users = Source.where("id >= ?", start_influencer_id).order("id asc")
   end
 
   # users.each do |user|
@@ -62,7 +62,7 @@ task :parse_tweets=> [:environment] do
 
       tweets.each do |tweet|
 
-        user = Influencer.where(:handle => "@#{tweet.user.screen_name}").first
+        user = Source.where(:handle => "@#{tweet.user.screen_name}").first
 
         if !user
           puts "we couldn't find an influencer #{tweet.user.screen_name}"
@@ -128,7 +128,7 @@ task :parse_tweets=> [:environment] do
               twurl = TwurlLink.create!({
                 :twitter_id => tweet.id,
                 :original_tweet => tweet.full_text,
-                :influencer => user,
+                :source => user,
                 :headline => article.title,
                 :headline_image_url => headline_image_url,
                 :headline_image_width => headline_image_width,
@@ -137,7 +137,7 @@ task :parse_tweets=> [:environment] do
               })
 
               feed.twurls << twurl
-              
+
               number_of_twurls_created += 1
               puts "we created #{number_of_twurls_created}"
             rescue

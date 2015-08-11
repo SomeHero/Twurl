@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150807042336) do
+ActiveRecord::Schema.define(version: 20150808034909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,15 +96,6 @@ ActiveRecord::Schema.define(version: 20150807042336) do
 
   add_index "influencer_event_daily_summaries", ["influencer_id"], name: "index_influencer_event_daily_summaries_on_influencer_id", using: :btree
 
-  create_table "influencers", force: true do |t|
-    t.string   "handle"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "twitter_username"
-    t.integer  "channel_id"
-    t.string   "profile_image_url"
-  end
-
   create_table "parse_twurls_batch_audits", force: true do |t|
     t.integer  "twurls_created"
     t.integer  "twurls_errors"
@@ -112,6 +103,16 @@ ActiveRecord::Schema.define(version: 20150807042336) do
     t.integer  "last_influencer_parsed_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "sources", force: true do |t|
+    t.string   "handle"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "twitter_username"
+    t.integer  "channel_id"
+    t.string   "profile_image_url"
+    t.boolean  "is_influencer",     default: false
   end
 
   create_table "twurl_event_daily_summaries", force: true do |t|
@@ -135,7 +136,7 @@ ActiveRecord::Schema.define(version: 20150807042336) do
   add_index "twurl_events", ["twurl_link_id"], name: "index_twurl_events_on_twurl_link_id", using: :btree
 
   create_table "twurls", force: true do |t|
-    t.integer  "influencer_id"
+    t.integer  "source_id"
     t.string   "headline_image_url"
     t.string   "headline"
     t.string   "description"
@@ -152,7 +153,7 @@ ActiveRecord::Schema.define(version: 20150807042336) do
   end
 
   add_index "twurls", ["display"], name: "index_twurls_on_display", using: :btree
-  add_index "twurls", ["influencer_id"], name: "index_twurls_on_influencer_id", using: :btree
+  add_index "twurls", ["source_id"], name: "index_twurls_on_source_id", using: :btree
 
   create_table "twurls_feeds", id: false, force: true do |t|
     t.integer "twurl_id"

@@ -5,3 +5,18 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+AdminUser.create!({:email => 'admin@twurl.net', :password => 'twurl424#'  })
+
+feed = Feed.create!(
+  :feed_name => "Public Feed",
+  :is_public => true
+)
+
+twurls = TwurlLink.all
+
+twurls.each do |twurl|
+  feed.twurls << twurl
+end
+
+feed.save!

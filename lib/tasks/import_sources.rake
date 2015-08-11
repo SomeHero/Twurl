@@ -5,7 +5,7 @@ task :import_sources=> [:environment] do
 
   file = "db/sources.csv"
 
-  Influencer.destroy_all
+  Source.destroy_all
   Channel.destroy_all
   Category.destroy_all
 
@@ -28,7 +28,7 @@ task :import_sources=> [:environment] do
       )
     end
 
-    source = Influencer.create!(
+    source = Source.create!(
       :twitter_username => row[0],
       :handle => row[1],
       :channel => channel

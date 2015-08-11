@@ -85,10 +85,24 @@ task :parse_user_tweets=> [:environment] do
 
             puts "we're creating a twurl"
 
+            source = Source.where(:handle => "@#{tweet.user.screen_name}").first
+
+            if !source
+              source = Source.create!({
+                :twitter_username => tweet.user.screen_name,
+                :handle => tweet.user.name,
+                :profile_image_url => tweet.user.profile_image_url.to_s
+              })
+            else
+              source.profile_image_url = tweet.user.profile_image_url.to_s
+              source.save!
+            end
+
             begin
               twurl = TwurlLink.create!({
                 :twitter_id => tweet.id,
                 :original_tweet => tweet.full_text,
+                :source => source,
                 :headline => article.title,
                 :headline_image_url => headline_image_url,
                 :headline_image_width => headline_image_width,

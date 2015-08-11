@@ -11,13 +11,13 @@ permit_params :influencer_id, :headline_image_url, :headline_image_height, :head
 index do
   column :id
   column "category" do |twurl|
-    twurl.influencer.channel.category.name if twurl.influencer
+    twurl.source.channel.category.name if twurl.source && twurl.source.channel && twurl.source.channel.category
   end
   column "channel" do |twurl|
-    twurl.influencer.channel.name if twurl.influencer
+    twurl.source.channel.name if twurl.source && twurl.source.channel
   end
   column "source" do |twurl|
-    twurl.influencer.handle if twurl.influencer
+    twurl.source.handle if twurl.source
   end
   column :headline
   column "Image" do |twurl|
