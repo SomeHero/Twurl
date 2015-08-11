@@ -91,7 +91,8 @@ task :parse_user_tweets=> [:environment] do
               source = Source.create!({
                 :twitter_username => "@#{tweet.user.screen_name}",
                 :handle => tweet.user.name,
-                :profile_image_url => tweet.user.profile_image_url.to_s
+                :profile_image_url => tweet.user.profile_image_url.to_s,
+                :influencer => false
               })
             else
               source.profile_image_url = tweet.user.profile_image_url.to_s
