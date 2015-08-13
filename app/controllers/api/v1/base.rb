@@ -35,6 +35,8 @@ module API
       end
 
       mount API::V1::Categories
+      mount API::V1::ReadingList
+      mount API::V1::Sources
       mount API::V1::Twurls
       mount API::V1::TwurlEvents
       mount API::V1::Users

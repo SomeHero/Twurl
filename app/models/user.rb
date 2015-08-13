@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_many :feeds
+  has_many :muted_sources, class_name: "UserMutedSource"
+  has_many :reading_list_items, class_name: "UserReadingList"
 
   def as_json(options={})
   {
@@ -8,7 +10,9 @@ class User < ActiveRecord::Base
     :twitter_username => self.twitter_username,
     :first_name => self.first_name,
     :last_name => self.last_name,
-    :email_address => self.email_address
+    :email_address => self.email_address,
+    :muted_sources => self.muted_sources,
+    :reading_list => self.reading_list_items
   }
   end
 

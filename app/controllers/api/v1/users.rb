@@ -49,6 +49,15 @@ module API
           user
         end
 
+        desc "returns a user"
+        get "/:id" do
+          Rails.logger.debug "Getting User #{params["id"]}"
+
+          user = User.find(params["id"])
+
+          user
+        end
+
         desc "returns all twurls in the users private feed"
         get "/:id/feeds" do
           Rails.logger.debug "Getting Twurls for User #{params["id"]}"
@@ -68,9 +77,9 @@ module API
             last_twurl_id = params["last_twurl_id"].to_i
           end
           if params["category_id"] && params["category_id"].to_s.length > 0
-            twurls = feed.twurls.where("display = ? AND id < ? AND influencer_id IN (?)", true, last_twurl_id, Influencer.select("id").where(channel_id: Channel.select("id").where(category_id: params["category_id"]))).order('id DESC').offset(offset).take(20)
+            twurls = feed.twurls.where("display = ? AND id < ? AND source_id IN (?) and source_id NOT IN (??)", true, last_twurl_id, Influencer.select("id").where(channel_id: Channel.select("id").where(category_id: params["category_id"])), UserMutedSource.select("source_id").where(user_id: params["id"])).order('id DESC').offset(offset).take(20)
           else
-            twurls = feed.twurls.where("display = ? AND id < ?", true, last_twurl_id).order('id DESC').offset(offset).take(20)
+            twurls = feed.twurls.where("display = ? AND id < ? AND source_id NOT IN (?)", true, last_twurl_id, UserMutedSource.select("source_id").where(user_id: params["id"])).order('id DESC').offset(offset).take(20)
           end
 
           twurls

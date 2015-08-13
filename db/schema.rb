@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150808034909) do
+ActiveRecord::Schema.define(version: 20150812023449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,6 +165,26 @@ ActiveRecord::Schema.define(version: 20150808034909) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "user_muted_sources", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "source_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_muted_sources", ["source_id"], name: "index_user_muted_sources_on_source_id", using: :btree
+  add_index "user_muted_sources", ["user_id"], name: "index_user_muted_sources_on_user_id", using: :btree
+
+  create_table "user_reading_lists", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "twurl_link_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_reading_lists", ["twurl_link_id"], name: "index_user_reading_lists_on_twurl_link_id", using: :btree
+  add_index "user_reading_lists", ["user_id"], name: "index_user_reading_lists_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "twitter_id"
