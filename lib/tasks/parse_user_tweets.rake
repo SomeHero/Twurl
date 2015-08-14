@@ -12,6 +12,9 @@ task :parse_user_tweets=> [:environment] do
     config.token = ENV["DIFFBOT_TOKEN"]
   end
 
+  embedly_api = Embedly::API.new :key => 'f782cd992e754ce1b0ef53aff7628c46',
+          :user_agent => 'Mozilla/5.0 (compatible; mytestapp/1.0; james@somehero.com)'
+
   number_of_twurls_created = 0
   number_of_twurls_errors = 0
   url_exceptions = UrlException.pluck(:url)
@@ -54,10 +57,14 @@ task :parse_user_tweets=> [:environment] do
 
             url = urls.first
 
-            # call api with key (you'll need a real key)
-            embedly_api = Embedly::API.new :key => 'f782cd992e754ce1b0ef53aff7628c46',
-                    :user_agent => 'Mozilla/5.0 (compatible; mytestapp/1.0; james@somehero.com)'
-            obj = embedly_api.extract :url => url
+            begin
+              obj = embedly_api.extract :url => url
+            rescue
+              puts "Error extracting url: #{$!}"
+
+              next
+            end
+            
             article = obj[0]
 
             uri = URI.parse(article.provider_url)
