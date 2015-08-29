@@ -14,6 +14,7 @@ group :development do
   gem 'pry-remote'
   gem 'rb-readline'
   gem 'awesome_print'
+  gem 'slack-post'
 end
 
 gem 'rails_12factor'

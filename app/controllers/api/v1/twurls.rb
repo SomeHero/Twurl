@@ -1,3 +1,5 @@
+require 'slack/post'
+
 module API
   module V1
     class Twurls < Grape::API
@@ -36,6 +38,36 @@ module API
           end
 
           twurls
+        end
+
+        desc "posts to a slack channel"
+        params do
+          requires :user_id, type: Integer, desc: "the id of the user"
+          requires :slack_channel_id, type: Integer, desc: "the id of the slack channel to post to"
+        end
+        post "/:twurl_id/slackit" do
+          Rails.logger.debug "posting to slack"
+
+          user = User.find(params["user_id"])
+
+          #return error if not user
+
+          twurl = TwurlLink.find(params["twurl_id"])
+
+          #return error if not twurl
+
+          slack_channel = SlackChannel.find(params["slack_channel_id"])
+
+          #return error slack_channel or if slack_channel is not owned by user
+
+          #slackit
+          Slack::Post.configure(
+            webhook_url: slack_channel.webhook_url,
+            username: 'James R'
+          )
+
+          message = "<" + twurl.url + ">"
+          Slack::Post.post message, '#general'
         end
       end
     end
