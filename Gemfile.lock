@@ -84,11 +84,8 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
-    diffbot (0.1.8)
-      excon
-      hashie (= 3.3.2)
-      nokogiri (~> 1.5.0)
-      yajl-ruby
+    domain_name (0.5.24)
+      unf (>= 0.0.5, < 1.0.0)
     embedly (1.9.1)
       json
       oauth
@@ -96,10 +93,14 @@ GEM
     equalizer (0.0.11)
     erubis (2.7.0)
     eventmachine (1.0.7)
-    excon (0.45.3)
     execjs (2.5.2)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    faraday-cookie_jar (0.0.6)
+      faraday (>= 0.7.4)
+      http-cookie (~> 1.0.0)
+    faraday_middleware (0.10.0)
+      faraday (>= 0.7.4, < 0.10)
     fastimage (1.7.0)
       addressable (~> 2.3, >= 2.3.5)
     ffi (1.9.8)
@@ -139,6 +140,8 @@ GEM
     hitimes (1.2.2)
     http (0.6.4)
       http_parser.rb (~> 0.6.0)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     http_parser.rb (0.6.0)
     i18n (0.7.0)
     ice_nine (0.11.1)
@@ -177,15 +180,24 @@ GEM
       callsite (~> 0.0, >= 0.0.11)
       rack-contrib (~> 1.1)
       railties (>= 3.0.0, < 5.0.0)
+    metainspector (4.6.1)
+      addressable (~> 2.3.5)
+      faraday (~> 0.9.0)
+      faraday-cookie_jar (~> 0.0.6)
+      faraday_middleware (~> 0.10)
+      fastimage
+      nokogiri (~> 1.6)
     method_source (0.8.2)
     mime-types (1.25.1)
+    mini_portile (0.6.2)
     minitest (5.7.0)
     multi_json (1.11.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     naught (1.0.0)
     nenv (0.2.0)
-    nokogiri (1.5.11)
+    nokogiri (1.6.6.2)
+      mini_portile (~> 0.6.0)
     notiffany (0.0.6)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -343,7 +355,6 @@ DEPENDENCIES
   awesome_print
   coffee-rails (~> 4.0.0)
   devise
-  diffbot
   embedly
   fastimage
   grape
@@ -352,6 +363,7 @@ DEPENDENCIES
   jquery-rails
   letter_opener
   meta_request
+  metainspector (~> 4.6.1)
   pg
   pry (~> 0.9)
   pry-nav (~> 0.2)
@@ -372,3 +384,6 @@ DEPENDENCIES
   twitter
   twitter-text
   uglifier (>= 1.3.0)
+
+BUNDLED WITH
+   1.10.6
