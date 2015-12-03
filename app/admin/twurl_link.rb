@@ -5,7 +5,7 @@ filter :url
 filter :created_at
 filter :display
 
-permit_params :influencer_id, :headline_image_url, :headline_image_height, :headline_image_width,
+permit_params :source_id, :headline_image_url, :headline_image_height, :headline_image_width,
   :headline, :description, :url, :twitter_id, :original_tweet, :display
 
 index do
@@ -28,6 +28,17 @@ index do
   column :updated_at
   column :display
   actions
+end
+
+form do |f|
+  f.inputs "Twurl Details" do
+    f.input :id
+    f.input :headline
+    f.input :headline_image_url
+    f.input :url
+    f.input :display
+  end
+  f.actions
 end
 
 end
