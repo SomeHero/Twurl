@@ -1,5 +1,9 @@
 ActiveAdmin.register Channel do
-
+  controller do
+    def scoped_collection
+      super.includes :category
+    end
+  end
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
