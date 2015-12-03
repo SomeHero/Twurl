@@ -1,4 +1,5 @@
 ActiveAdmin.register Channel do
+  config.per_page = 4
   controller do
     def scoped_collection
       super.includes :category
