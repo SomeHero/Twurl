@@ -75,11 +75,6 @@ ActiveRecord::Schema.define(version: 20150827185011) do
 
   add_index "feeds", ["user_id"], name: "index_feeds_on_user_id", using: :btree
 
-  create_table "feeds_twurl_links", id: false, force: true do |t|
-    t.integer "twurl_link_id", null: false
-    t.integer "feed_id",       null: false
-  end
-
   create_table "feeds_twurls", id: false, force: true do |t|
     t.integer "feed_id",       null: false
     t.integer "twurl_link_id", null: false
@@ -173,11 +168,6 @@ ActiveRecord::Schema.define(version: 20150827185011) do
 
   add_index "twurls", ["display"], name: "index_twurls_on_display", using: :btree
   add_index "twurls", ["source_id"], name: "index_twurls_on_source_id", using: :btree
-
-  create_table "twurls_feeds", id: false, force: true do |t|
-    t.integer "twurl_id"
-    t.integer "feed_id"
-  end
 
   create_table "url_exceptions", force: true do |t|
     t.string   "url"

@@ -32,11 +32,16 @@ end
 
 form do |f|
   f.inputs "Twurl Details" do
-    f.input :id
-    f.input :headline
-    f.input :headline_image_url
-    f.input :url
+    f.input :id, :as => :string, :input_html => { :readonly => true }
+    f.input :source, :collection => Source.where(:id => f.object.source).pluck(:handle, :id), :include_blank => false
+    f.input :headline, :as => :text, :input_html => { :class => 'autogrow', :rows => 4 }
+    f.input :headline_image_url, :as => :url
+    f.input :description, :as => :text, :input_html => { :class => 'autogrow', :rows => 6 }
+    f.input :original_tweet, :as => :text, :input_html => { :class => 'autogrow', :rows => 4 }
+    f.input :url, :as => :url
     f.input :display
+    f.input :created_at, :as => :string, :input_html => { :readonly => true }
+    f.input :updated_at, :as => :string, :input_html => { :readonly => true }
   end
   f.actions
 end
