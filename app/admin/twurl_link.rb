@@ -1,15 +1,19 @@
 ActiveAdmin.register TwurlLink do
-
+filter :feeds, collection: proc { Feed.all.collect {|feed| [feed.feed_name, feed.id] } }
 filter :headline
 filter :url
 filter :created_at
 filter :display
+
 
 permit_params :source_id, :headline_image_url, :headline_image_height, :headline_image_width,
   :headline, :description, :url, :twitter_id, :original_tweet, :display
 
 index do
   column :id
+  column "feed" do |twurl|
+    twurl.feeds.first.feed_name if twurl.feeds
+  end
   column "category" do |twurl|
     twurl.source.channel.category.name if twurl.source && twurl.source.channel && twurl.source.channel.category
   end

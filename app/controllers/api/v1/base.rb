@@ -35,6 +35,7 @@ module API
       end
 
       mount API::V1::Categories
+      mount API::V1::Feeds
       mount API::V1::ReadingList
       mount API::V1::SlackChannels
       mount API::V1::Sources
