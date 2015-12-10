@@ -101,7 +101,7 @@ task :parse_user_tweets_v2=> [:environment] do
               :headline_image_url => headline_image_url,
               :headline_image_width => headline_image_width,
               :headline_image_height => headline_image_height,
-              :url => article.url
+              :url => article.url,
               :display => true
             })
 
