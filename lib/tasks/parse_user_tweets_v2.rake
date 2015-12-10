@@ -102,6 +102,7 @@ task :parse_user_tweets_v2=> [:environment] do
               :headline_image_width => headline_image_width,
               :headline_image_height => headline_image_height,
               :url => article.url
+              :display => true
             })
 
             feed.twurls << twurl
