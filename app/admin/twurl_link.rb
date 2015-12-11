@@ -40,6 +40,8 @@ form do |f|
     f.input :source, :collection => Source.where(:id => f.object.source).pluck(:handle, :id), :include_blank => false
     f.input :headline, :as => :text, :input_html => { :class => 'autogrow', :rows => 4 }
     f.input :headline_image_url, :as => :url
+    f.input :headline_image_height
+    f.input :headline_image_width
     f.input :description, :as => :text, :input_html => { :class => 'autogrow', :rows => 6 }
     f.input :original_tweet, :as => :text, :input_html => { :class => 'autogrow', :rows => 4 }
     f.input :url, :as => :url
